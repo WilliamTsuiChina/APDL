@@ -1,0 +1,16 @@
+!设置杨氏模量，泊松比，密度，定义189梁单元
+/PMACRO
+
+Ex_mat=2.1e5
+Nuxy_mat=0.3
+Dens_mat=7.85e-9
+
+
+/NOPR               
+/PREP7
+
+ET,1,BEAM189
+MP,EX,1,Ex_mat
+MP,NUXY,1,Nuxy_mat
+MP,DENS,1,Dens_mat
+	

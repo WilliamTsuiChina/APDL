@@ -1,0 +1,338 @@
+!2018-01-02   Ver.01
+!Name: 无附着塔身建模加载分析-A版
+!适用范围: 塔身底部有基础节，基础节以上全部为标准节
+!标准节类型(参数TTYPE)：1-四面人字腹杆 2-四面K形腹杆 3-人字+顺斜腹杆
+!腹杆类型(参数FUGAN): 1-方管 2-角钢 3-H型钢
+!大变形开关(参数LAR)：1-打开  0-关闭
+!Z+为塔顶方向
+!**********使用说明**********
+!  1、根据计算需要，修改‘参数定义’部分的参数，然后保存文件;
+!  2、将本文件放置于当前ANSYS的工作目录下;
+!  3、在ANSYS命令窗口输入本宏文件的文件名(不含后缀.mac)，
+!     本宏文件名称可修改，后缀‘.MAC’必须保留;
+!  4、回车运行即可自动运行求解;
+!  5、在工作目录下会自动生成名为‘OUTPUT’的txt文件，此即为结果汇总;
+!  6、可以修改参数再次求解，结果自动追加在OUTPUT.txt中.
+!****************************
+*DO,JJ,1,8,1
+PARSAV
+/CLEAR
+PARRES
+/PREP7
+!
+!**************参数定义**************
+!
+TTYPE=2  !标准节类型
+LAR=0    !大变形开关
+!定义标准节立柱截面，H型钢
+w1=350    !翼缘宽度
+w2=350
+t1=19     !翼缘板厚度
+t2=39.6   !补板子计算等效腹板厚度，如果是两侧封板，也用等效腹板厚度
+!定义基础节立柱截面，H型钢
+ww1=350   !翼缘宽度
+ww2=350
+tt1=19     !!翼缘板厚度
+tt2=46.6   !补板子计算等效腹板厚度，如果是两侧封板，也用等效腹板厚度
+!定义腹杆截面
+FUGAN=1   !腹杆类型。类型1和2只要定义b1、t3；类型3只要定义wf1,wf2,tf1,tf2
+
+b1=180   !方管或角钢的宽度
+t3=10    !壁厚 
+
+wf1=200    !翼缘宽度 
+wf2=200
+tf1=10     !翼缘板厚度
+tf2=10     !腹板厚度
+
+!定义顶部十字梁，实心矩形，此为辅助加载用的构件
+b2=400   
+
+!定义塔身参数
+L1=2800  !标准节中心距
+H1=3000  !标准节每档高度
+N1=12    !标准节数量
+N2=N1*2  !标准节档数,自动计算，按照一节标准节两档计算，特殊情况可手动赋值
+N3=4     !基础节档数
+
+!定义载荷
+FFZ=285    !顶部竖向力，单位：吨
+!顶部加载的垂直力需要减去塔身的自重，建议先用FFZ=0计算，查看结果中垂直力，即为塔身自重
+!再用结构反力中的V减去塔身自重后赋值给FFZ
+MMT=1298   !顶部弯矩，单位：吨.米
+!
+!**************参数定义-结束**************
+!
+*DIM,DOWNSOL,ARRAY,4,4
+DOWNFX=0
+DOWNFY=0
+DOWNFZ=0
+X4 = 10000
+ET,1,BEAM188
+MP,EX,1,2.1E5
+MP,PRXY,1,0.3
+MP,DENS,1,7.85E-9
+MP,EX,2,2.1E6
+MP,PRXY,2,0.3
+MP,DENS,2,7.85E-9
+SECTYPE,1,BEAM,I,,0
+SECOFFSET,CENT
+SECDATA,w1,w1,w2,t1,t1,t2
+*IF,FUGAN,EQ,1,THEN 
+SECTYPE,2,BEAM,HREC,,0
+SECOFFSET,CENT
+SECDATA,b1,b1,t3,t3,t3,t3
+*ELSEIF,FUGAN,EQ,2 
+SECTYPE,2,BEAM,L,,0
+SECOFFSET,CENT
+SECDATA,b1,b1,t3,t3
+*ELSE  
+SECTYPE,2,BEAM,I,,0
+SECOFFSET,CENT
+SECDATA,wf1,wf1,wf2,tf1,tf1,tf2
+*ENDIF
+SECTYPE,3,BEAM,RECT,,0
+SECOFFSET,CENT
+SECDATA,b2,b2
+SECTYPE,4,BEAM,I,,0
+SECOFFSET,CENT
+SECDATA,ww1,ww1,ww2,tt1,tt1,tt2
+*DO,i,1,(N2+1)
+N,((i-1)*8+1),L1/2 ,L1/2 ,(i-1)*H1
+N,((i-1)*8+2),L1/2 ,0    ,(i-1)*H1
+N,((i-1)*8+3),L1/2 ,-L1/2,(i-1)*H1
+N,((i-1)*8+4),0    ,-L1/2,(i-1)*H1
+N,((i-1)*8+5),-L1/2,-L1/2,(i-1)*H1
+N,((i-1)*8+6),-L1/2,0    ,(i-1)*H1
+N,((i-1)*8+7),-L1/2,L1/2 ,(i-1)*H1
+N,((i-1)*8+8),0    ,L1/2 ,(i-1)*H1
+*ENDDO
+N,((N2+1)*8+1),0,0,N2*H1
+TYPE,1
+MAT,1
+SECNUM,4
+*DO,i,1,N3
+E,((i-1)*8+1),(i*8+1)
+E,((i-1)*8+3),(i*8+3)
+E,((i-1)*8+5),(i*8+5)
+E,((i-1)*8+7),(i*8+7)
+*ENDDO
+SECNUM,1
+*DO,i,N3+1,N2
+E,((i-1)*8+1),(i*8+1)
+E,((i-1)*8+3),(i*8+3)
+E,((i-1)*8+5),(i*8+5)
+E,((i-1)*8+7),(i*8+7)
+*ENDDO
+SECNUM,2
+*IF,TTYPE,EQ,1,THEN 
+*DO,i,1,(N2+1)
+E,((i-1)*8+1),((i-1)*8+2)
+E,((i-1)*8+2),((i-1)*8+3)
+E,((i-1)*8+3),((i-1)*8+4)
+E,((i-1)*8+4),((i-1)*8+5)
+E,((i-1)*8+5),((i-1)*8+6)
+E,((i-1)*8+6),((i-1)*8+7)
+E,((i-1)*8+7),((i-1)*8+8)
+E,((i-1)*8+8),((i-1)*8+1)
+*ENDDO
+*DO,i,1,N2
+E,((i-1)*8+1),(i*8+2)
+E,((i-1)*8+3),(i*8+2)
+E,((i-1)*8+3),(i*8+4)
+E,((i-1)*8+5),(i*8+4)
+E,((i-1)*8+5),(i*8+6)
+E,((i-1)*8+7),(i*8+6)
+E,((i-1)*8+7),(i*8+8)
+E,((i-1)*8+1),(i*8+8)
+*ENDDO
+*ELSEIF,TTYPE,EQ,2 
+*DO,i,1,(N2+1)
+E,((i-1)*8+1),((i-1)*8+2)
+E,((i-1)*8+2),((i-1)*8+3)
+E,((i-1)*8+3),((i-1)*8+4)
+E,((i-1)*8+4),((i-1)*8+5)
+E,((i-1)*8+5),((i-1)*8+6)
+E,((i-1)*8+6),((i-1)*8+7)
+E,((i-1)*8+7),((i-1)*8+8)
+E,((i-1)*8+8),((i-1)*8+1)
+*ENDDO
+*DO,i,1,N2-1,2
+E,((i-1)*8+1),(i*8+3)
+E,((i-1)*8+5),(i*8+3)
+E,((i-1)*8+5),(i*8+7)
+E,((i-1)*8+1),(i*8+7)
+*ENDDO
+*DO,i,2,N2,2
+E,((i-1)*8+3),(i*8+1)
+E,((i-1)*8+3),(i*8+5)
+E,((i-1)*8+7),(i*8+5)
+E,((i-1)*8+7),(i*8+1)
+*ENDDO
+*ELSE 
+*DO,i,1,(N2+1)
+E,((i-1)*8+1),((i-1)*8+2)
+E,((i-1)*8+2),((i-1)*8+3)
+E,((i-1)*8+3),((i-1)*8+4)
+E,((i-1)*8+4),((i-1)*8+5)
+E,((i-1)*8+5),((i-1)*8+6)
+E,((i-1)*8+6),((i-1)*8+7)
+E,((i-1)*8+7),((i-1)*8+8)
+E,((i-1)*8+8),((i-1)*8+1)
+*ENDDO
+*DO,i,1,N2
+E,((i-1)*8+1),(i*8+2)
+E,((i-1)*8+3),(i*8+2)
+E,((i-1)*8+5),(i*8+6)
+E,((i-1)*8+7),(i*8+6)
+E,((i-1)*8+1),(i*8+7)
+E,((i-1)*8+5),(i*8+3)
+*ENDDO
+*ENDIF
+MAT,2
+SECNUM,3
+E,((N2+1)*8+1),(N2*8+1)
+E,((N2+1)*8+1),(N2*8+3)
+E,((N2+1)*8+1),(N2*8+5)
+E,((N2+1)*8+1),(N2*8+7)
+D,1,ALL,0
+D,3,ALL,0
+D,5,ALL,0
+D,7,ALL,0
+*IF,JJ,EQ,1,THEN 
+F,((N2+1)*8+1),FZ,-FFZ*10000
+F,((N2+1)*8+1),MX,MMT*10000000
+F,((N2+1)*8+1),MY,0
+*ELSEIF,JJ,EQ,2  
+F,((N2+1)*8+1),FZ,-FFZ*10000
+F,((N2+1)*8+1),MX,(MMT/1.414)*10000000
+F,((N2+1)*8+1),MY,(MMT/1.414)*10000000
+*ELSEIF,JJ,EQ,3  
+F,((N2+1)*8+1),FZ,-FFZ*10000
+F,((N2+1)*8+1),MX,0  
+F,((N2+1)*8+1),MY,MMT*10000000
+*ELSEIF,JJ,EQ,4  
+F,((N2+1)*8+1),FZ,-FFZ*10000
+F,((N2+1)*8+1),MX,-(MMT/1.414)*10000000
+F,((N2+1)*8+1),MY, (MMT/1.414)*10000000
+*ELSEIF,JJ,EQ,5  
+F,((N2+1)*8+1),FZ,-FFZ*10000
+F,((N2+1)*8+1),MX,-MMT*10000000
+F,((N2+1)*8+1),MY,0
+*ELSEIF,JJ,EQ,6  
+F,((N2+1)*8+1),FZ,-FFZ*10000
+F,((N2+1)*8+1),MX,-(MMT/1.414)*10000000
+F,((N2+1)*8+1),MY,-(MMT/1.414)*10000000
+*ELSEIF,JJ,EQ,7 
+F,((N2+1)*8+1),FZ,-FFZ*10000
+F,((N2+1)*8+1),MX,0
+F,((N2+1)*8+1),MY,-MMT*10000000
+*ELSE  
+F,((N2+1)*8+1),FZ,-FFZ*10000
+F,((N2+1)*8+1),MX, (MMT/1.414)*10000000
+F,((N2+1)*8+1),MY,-(MMT/1.414)*10000000
+*ENDIF
+/SOLU
+ACEL,,,9800 
+ALLSEL,ALL
+*IF,LAR,EQ,1,THEN
+NLGEOM,ON
+*ELSE
+NLGEOM,OFF
+*ENDIF
+SOLVE
+/POST1
+DOWNSOL(1,1)=1
+DOWNSOL(2,1)=3
+DOWNSOL(3,1)=5
+DOWNSOL(4,1)=7
+*DO,I,1,4
+*GET,DOWNSOL(I,2),NODE,DOWNSOL(I,1),RF,FX
+*GET,DOWNSOL(I,3),NODE,DOWNSOL(I,1),RF,FY
+*GET,DOWNSOL(I,4),NODE,DOWNSOL(I,1),RF,FZ
+*ENDDO
+*DO,I,1,4
+DOWNFX=DOWNFX+DOWNSOL(I,2)
+*ENDDO
+*DO,I,1,4
+DOWNFY=DOWNFY+DOWNSOL(I,3)
+*ENDDO
+*DO,I,1,4
+DOWNFZ=DOWNFZ+DOWNSOL(I,4)
+*ENDDO
+TEMP01=0
+TEMP02=0
+TEMP03=0
+TEMP04=0
+*GET,TEMP01,ELEM,1,SMISC,31
+*GET,TEMP02,ELEM,2,SMISC,31
+*GET,TEMP03,ELEM,3,SMISC,31
+*GET,TEMP04,ELEM,4,SMISC,31
+*CFOPEN,OUTPUT,txt,,Append
+*IF,JJ,EQ,1,THEN
+*VWRITE,
+('-----独立工况反力求解-----')
+*VWRITE,N2*H1/1000,'m'
+('塔身总长H=',F12.2,'|',A12)
+*IF,TTYPE,EQ,1,THEN
+*VWRITE,
+('标准节类型：四面人字腹杆')
+*ELSEIF,TTYPE,EQ,2
+*VWRITE,
+('标准节类型：四面K形腹杆')
+*ELSE
+*VWRITE,
+('标准节类型：人字+顺斜腹杆')
+*ENDIF
+*VWRITE,MMT,'t.m'
+('顶部弯矩M=',F12.2,'|',A12)
+*VWRITE,FFZ,'t'
+('顶部垂直力F_V=',F12.2,'|',A12)
+*ENDIF
+*VWRITE,
+('--------------------------------------')
+*VWRITE,JJ
+('求解结果-工况',F8.0)
+*VWRITE,
+('----柱脚支点反力----')
+*VWRITE,'Node','F_X(t)','F_Y(t)','F_Z(t)'
+(A8,'|',A8,'|',A8,'|',A8)
+*DO,J,1,4
+*VWRITE,DOWNSOL(J,1)/1,DOWNSOL(J,2)/X4,DOWNSOL(J,3)/X4,DOWNSOL(J,4)/X4
+(F8.0,'|',F8.2,'|',F8.2,'|',F8.2)
+*ENDDO
+*VWRITE,'Total',DOWNFX/X4,DOWNFY/X4,DOWNFZ/X4
+(A8,'|',F8.2,'|',F8.2,'|',F8.2)
+TP1=0
+*VWRITE,
+('最大合位移')
+NSORT,U,SUM,0,1,ALL
+*GET,TP1,SORT,0,MAX
+*VWRITE,TP1
+(F8.2)
+*VWRITE,
+('最大X位移')
+NSORT,U,X,0,1,ALL
+*GET,TP1,SORT,0,MAX
+*VWRITE,TP1
+(F8.2)
+*VWRITE,
+('最大Y位移')
+NSORT,U,Y,0,1,ALL
+*GET,TP1,SORT,0,MAX
+*VWRITE,TP1
+(F8.2)
+*VWRITE,
+('最大Z位移')
+NSORT,U,Z,0,1,ALL
+*GET,TP1,SORT,0,MAX
+*VWRITE,TP1
+(F8.2)
+*VWRITE,
+('底部立柱应力MPa-拉正压负')
+*VWRITE,TEMP01,TEMP02,TEMP03,TEMP04
+(F8.2,'|',F8.2,'|',F8.2,'|',F8.2)
+*VWRITE,
+('--------------------------------------')
+*CFCLOS
+*ENDDO 

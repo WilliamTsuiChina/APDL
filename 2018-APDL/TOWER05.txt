@@ -1,0 +1,239 @@
+!2017年10月19日
+!塔身建模分析宏
+!标准节类型：四面人字腹杆
+!附着层数：一层
+![自动提取结果][增量求解]
+!Z+为向上方向
+!
+FLAG=0   !循环计次变量
+!修改循环中JJ的位置，可实现对不同参数增量求解
+*DO,JJ,0,5,1   !循环求解开始
+FLAG=FLAG+1
+PARSAV  !清空前保存标量参数
+/CLEAR
+PARRES  !清空后释放标量参数
+/PREP7
+!所有输入参数定义
+!定义立柱截面，H型钢
+w1=300
+w2=300
+t1=20
+t2=15
+!定义腹杆截面，方管
+b1=100
+t3=10
+!定义顶部十字梁，矩形
+b2=300
+!定义塔身参数
+L1=2000  !标准节中心距
+H1=3000  !标准节每档高度
+
+!!!!!!!!!!!!!!!!!!!!!!!
+N1=10+JJ    !标准节数量
+!!!!!!!!!!!!!!!!!!!!!!!
+
+N2=N1*2  !标准节档数
+N3=10    !附着位置，从下往上第几档上端
+!定义载荷，作用与NODE((N2+1)*8+1)
+FFZ=0   !顶部竖向力，单位：吨
+MTT=300 !顶部弯矩，单位：吨.米
+!上层附着四个节点的反力数组：节点号，FX,FY
+*DIM,UPSOL,ARRAY,4,3
+!底部固定四个节点的反力数组：节点号，FX,FY,FZ
+*DIM,DOWNSOL,ARRAY,4,4
+
+X4 = 10000
+
+!定义单元类型、材料属性
+ET,1,BEAM188
+MP,EX,1,2.1E5
+MP,PRXY,1,0.3
+MP,DENS,1,7.85E-9
+
+ET,2,LINK10
+R,2,31400
+MP,EX,2,2.1E6    !特别加强刚度
+MP,DENS,2,7.85E-9
+KEYOPT,2,3,1     !1表示仅受压，0表示仅受拉
+
+
+
+
+!定义立柱截面，H型钢
+SECTYPE,1,BEAM,I,,0
+SECOFFSET,CENT
+SECDATA,w1,w1,w2,t1,t1,t2
+!定义腹杆截面，方管
+SECTYPE,2,BEAM,HREC,,0
+SECOFFSET,CENT
+SECDATA,b1,b1,t3,t3,t3,t3
+!定义顶部十字梁，矩形
+SECTYPE,3,BEAM,RECT,,0
+SECOFFSET,CENT
+SECDATA,b2,b2
+
+
+
+
+!定义节点
+*DO,i,1,(N2+1)
+N,((i-1)*8+1),L1/2 ,L1/2 ,(i-1)*H1
+N,((i-1)*8+2),L1/2 ,0    ,(i-1)*H1
+N,((i-1)*8+3),L1/2 ,-L1/2,(i-1)*H1
+N,((i-1)*8+4),0    ,-L1/2,(i-1)*H1
+N,((i-1)*8+5),-L1/2,-L1/2,(i-1)*H1
+N,((i-1)*8+6),-L1/2,0    ,(i-1)*H1
+N,((i-1)*8+7),-L1/2,L1/2 ,(i-1)*H1
+N,((i-1)*8+8),0    ,L1/2 ,(i-1)*H1
+*ENDDO
+N,((N2+1)*8+1),0,0,N2*H1  !顶部中心点
+!建立单元
+TYPE,1
+MAT,1
+!1、立柱单元
+SECNUM,1
+*DO,i,1,N2
+E,((i-1)*8+1),(i*8+1)
+E,((i-1)*8+3),(i*8+3)
+E,((i-1)*8+5),(i*8+5)
+E,((i-1)*8+7),(i*8+7)
+*ENDDO
+!2、腹杆单元
+SECNUM,2
+!2-1、横腹杆
+*DO,i,1,(N2+1)
+E,((i-1)*8+1),((i-1)*8+2)
+E,((i-1)*8+2),((i-1)*8+3)
+E,((i-1)*8+3),((i-1)*8+4)
+E,((i-1)*8+4),((i-1)*8+5)
+E,((i-1)*8+5),((i-1)*8+6)
+E,((i-1)*8+6),((i-1)*8+7)
+E,((i-1)*8+7),((i-1)*8+8)
+E,((i-1)*8+8),((i-1)*8+1)
+*ENDDO
+!2-2、斜腹杆
+*DO,i,1,N2
+E,((i-1)*8+1),(i*8+2)
+E,((i-1)*8+3),(i*8+2)
+E,((i-1)*8+3),(i*8+4)
+E,((i-1)*8+5),(i*8+4)
+E,((i-1)*8+5),(i*8+6)
+E,((i-1)*8+7),(i*8+6)
+E,((i-1)*8+7),(i*8+8)
+E,((i-1)*8+1),(i*8+8)
+*ENDDO
+!3、顶部十字单元
+SECNUM,3
+E,((N2+1)*8+1),(N2*8+1)
+E,((N2+1)*8+1),(N2*8+3)
+E,((N2+1)*8+1),(N2*8+5)
+E,((N2+1)*8+1),(N2*8+7)
+!定义边界条件
+!底部固定约束
+D,1,ALL,0
+D,3,ALL,0
+D,5,ALL,0
+D,7,ALL,0
+!附着处约束XY两向位移
+D,N3*8+1,UX,0
+D,N3*8+3,UX,0
+D,N3*8+5,UX,0
+D,N3*8+7,UX,0
+D,N3*8+1,UY,0
+D,N3*8+3,UY,0
+D,N3*8+5,UY,0
+D,N3*8+7,UY,0
+!定义载荷，作用与NODE((N2+1)*8+1)
+F,((N2+1)*8+1),FZ,FZZ*10000
+F,((N2+1)*8+1),MX,MTT*10000000   !弯矩方向，若考虑其它工况，须增加MY
+!求解
+/SOLU
+!ACEL,,,9800  !重力加速度，若考虑自重则去掉前面的感叹号
+ALLSEL,ALL
+SOLVE
+
+
+!后处理提取结果数据
+/POST1
+!提取上层附着四个节点的反力
+UPSOL(1,1)=N3*8+1
+UPSOL(2,1)=N3*8+3
+UPSOL(3,1)=N3*8+5
+UPSOL(4,1)=N3*8+7
+*DO,I,1,4
+*GET,UPSOL(I,2),NODE,UPSOL(I,1),RF,FX
+*GET,UPSOL(I,3),NODE,UPSOL(I,1),RF,FY
+*ENDDO
+!附着位置XY两个方向合力
+UPFX=UPSOL(1,2)+UPSOL(2,2)+UPSOL(3,2)+UPSOL(4,2)
+UPFY=UPSOL(1,3)+UPSOL(2,3)+UPSOL(3,3)+UPSOL(4,3)
+!提取底部固定四个节点的反力
+DOWNSOL(1,1)=1
+DOWNSOL(2,1)=3
+DOWNSOL(3,1)=5
+DOWNSOL(4,1)=7
+*DO,I,1,4
+*GET,DOWNSOL(I,2),NODE,DOWNSOL(I,1),RF,FX
+*GET,DOWNSOL(I,3),NODE,DOWNSOL(I,1),RF,FY
+*GET,DOWNSOL(I,4),NODE,DOWNSOL(I,1),RF,FZ
+*ENDDO
+!底部位置三个方向合力
+DOWNFX=DOWNSOL(1,2)+DOWNSOL(2,2)+DOWNSOL(3,2)+DOWNSOL(4,2)
+DOWNFY=DOWNSOL(1,3)+DOWNSOL(2,3)+DOWNSOL(3,3)+DOWNSOL(4,3)
+DOWNFZ=DOWNSOL(1,4)+DOWNSOL(2,4)+DOWNSOL(3,4)+DOWNSOL(4,4)
+
+!写出结果到文件
+*CFOPEN,TowerRes,txt,,Append
+*VWRITE,
+('----------------------------------')
+*VWRITE,'SOLUTION  ',FLAG
+(A12,F8.0)
+*VWRITE,
+('----------------------------------')
+!塔身总高
+*VWRITE,'H=',N2*H1/1000,'m'
+(A8,'|',F12.2,'|',A12)
+!第一层附着高度
+*VWRITE,'A=',N3*H1/1000,'m'
+(A8,'|',F12.2,'|',A12)
+!悬臂高度
+*VWRITE,'C=',(N2-N3)*H1/1000,'m'
+(A8,'|',F12.2,'|',A12)
+!标准节中心距
+*VWRITE,'L1=',L1,'mm'
+(A8,'|',F12.2,'|',A12)
+!标准节立柱截面尺寸
+*VWRITE,'Mast','H',w1,'x',w2,'x',t2,'x',t1
+(A8,A4,F4.0,A1,F4.0,A1,F4.0,A1,F4.0)
+*VWRITE,
+('-----UP-----')
+*VWRITE,'Node','F_X(t)','F_Y(t)'
+(A8,'|',A12,'|',A12)
+*DO,J,1,4
+*VWRITE,UPSOL(J,1)/1,UPSOL(J,2)/X4,UPSOL(J,3)/X4
+(F8.0,'|',F12.2,'|',F12.2)
+*ENDDO
+*VWRITE,'Total',UPFX/X4,UPFY/X4
+(A8,'|',F12.2,'|',F12.2)
+*VWRITE,
+('----DOWN----')
+*VWRITE,'Node','F_X(t)','F_Y(t)','F_Z(t)'
+(A8,'|',A12,'|',A12,'|',A12)
+*DO,J,1,4
+*VWRITE,DOWNSOL(J,1)/1,DOWNSOL(J,2)/X4,DOWNSOL(J,3)/X4,DOWNSOL(J,4)/X4
+(F8.0,'|',F12.2,'|',F12.2,'|',F12.2)
+*ENDDO
+*VWRITE,'Total',DOWNFX/X4,DOWNFY/X4,DOWNFZ/X4
+(A8,'|',F12.2,'|',F12.2,'|',F12.2)
+*VWRITE,
+('---------------END----------------')
+*CFCLOS
+!写出到文件结束
+
+
+*ENDDO     !循环求解结束
+
+
+
+
+
