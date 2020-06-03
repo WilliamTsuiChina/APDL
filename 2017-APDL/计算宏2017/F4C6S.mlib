@@ -1,36 +1,36 @@
 F4C6S
 
-!ÓÐÎ»ÒÆºÍÓ¦Á¦½ØÍ¼°æ±¾ 2017.06.26
-!20170819¸ÄÃû
-!Ò»¼ü¼ÆËã°ËÖÖ¹¤¿öÊÜÁ¦£¬×Ô¶¯µ¼³ö°ËÖÖ¹¤¿ö·´Á¦
-!×Ô¶¯µ¼³öÈýÏòÎ»ÒÆÔÆÍ¼£¬ÕûÌåÓ¦Á¦ÔÆÍ¼
+!æœ‰ä½ç§»å’Œåº”åŠ›æˆªå›¾ç‰ˆæœ¬ 2017.06.26
+!20170819æ”¹å
+!ä¸€é”®è®¡ç®—å…«ç§å·¥å†µå—åŠ›ï¼Œè‡ªåŠ¨å¯¼å‡ºå…«ç§å·¥å†µååŠ›
+!è‡ªåŠ¨å¯¼å‡ºä¸‰å‘ä½ç§»äº‘å›¾ï¼Œæ•´ä½“åº”åŠ›äº‘å›¾
 
-!×Ô¶¯»ã×Ü×î´ó·´Á¦°üÂçÖµ
-!½á¹û¿ÉÊÖ¶¯µ¼ÈëEXCEL£¬°´·Ö¸ô·û'|'·ÖÁÐ
-!´ÓEXCEL¿É¸´ÖÆ±í¸ñÖÁWORD
+!è‡ªåŠ¨æ±‡æ€»æœ€å¤§ååŠ›åŒ…ç»œå€¼
+!ç»“æžœå¯æ‰‹åŠ¨å¯¼å…¥EXCELï¼ŒæŒ‰åˆ†éš”ç¬¦'|'åˆ†åˆ—
+!ä»ŽEXCELå¯å¤åˆ¶è¡¨æ ¼è‡³WORD
 
-!1¡¢¼ÓÔØ±¾¿âÎÄ¼þ*ulib,F4C6S,mlib
-!2¡¢µ÷ÓÃºê¼ÆËã,Àý*use,F4C6S,23,24,26,25,288,106.4,7,1,350,1973,2185,2401,2451
+!1ã€åŠ è½½æœ¬åº“æ–‡ä»¶*ulib,F4C6S,mlib
+!2ã€è°ƒç”¨å®è®¡ç®—,ä¾‹*use,F4C6S,23,24,26,25,288,106.4,7,1,350,1973,2185,2401,2451
 
-!×¢Òâ£ºË®Æ½´¹Ö±Å¤Á¦¶¼ÊÇ¶ÖÎªµ¥Î»£¬ÏµÊý×Ô¼º¼Ó
-!½öÊÊÓÃÓÚËÄµã¼ÓÔØ£¬ÁùµãÖ§³Å£¬Íâ¹Ò
+!æ³¨æ„ï¼šæ°´å¹³åž‚ç›´æ‰­åŠ›éƒ½æ˜¯å¨ä¸ºå•ä½ï¼Œç³»æ•°è‡ªå·±åŠ 
+!ä»…é€‚ç”¨äºŽå››ç‚¹åŠ è½½ï¼Œå…­ç‚¹æ”¯æ’‘ï¼Œå¤–æŒ‚
 
 
-!Author:ÐìÃ÷
+!Author:å¾æ˜Ž
 !Mail:342668998@qq.com
 !HomePage:http://xuming.science/
 
-!³õÊ¼¸³Öµ
-!¼ÓÔØ¹Ø¼üµã±àºÅ
+!åˆå§‹èµ‹å€¼
+!åŠ è½½å…³é”®ç‚¹ç¼–å·
 a = arg1
 b = arg2
 c = arg3
 d = arg4
-!µ¥Î»¸ÄÎªt£¬Ëõ¶ÌÃüÁî³¤¶È
+!å•ä½æ”¹ä¸ºtï¼Œç¼©çŸ­å‘½ä»¤é•¿åº¦
 f_v = arg5*10000
 f_h = arg6*10000
 f_m = arg7*10000
-!Ö§×ù½Úµã±àºÅ
+!æ”¯åº§èŠ‚ç‚¹ç¼–å·
 node01 = arg8
 node02 = arg9
 node03 = ar10
@@ -43,23 +43,23 @@ node06 = ar13
 ('-----REACTION-SOLUTIONS-----')
 *CFCLOS
 
-!µÚÒ»ÖÖ¹¤¿ö
+!ç¬¬ä¸€ç§å·¥å†µ
 
 /SOLU
 
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v/4
 FK,b,FZ,-f_v/4
 FK,c,FZ,-f_v/4
 FK,d,FZ,-f_v/4
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,0
 FK,b,FX,f_m
 FK,c,FX,0
 FK,d,FX,-f_m
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,-f_h/2-f_m
 FK,b,FY,-f_h/2
 FK,c,FY,f_m
@@ -68,9 +68,9 @@ FK,d,FY,0
 SOLVE
 
 /POST1
-!¿ªÊ¼Êä³öÍ¼Æ¬
+!å¼€å§‹è¾“å‡ºå›¾ç‰‡
 ALLSEL,ALL 
-!Êä³öÕûÌåXÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Xä½ç§»
 PLNSOL,U,X,0,1
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -89,7 +89,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåYÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Yä½ç§»
 PLNSOL,U,Y,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -108,7 +108,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåZÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Zä½ç§»
 PLNSOL,U,Z,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -126,7 +126,7 @@ PNGR,TMOD,1
 /SHOW,CLOSE 
 /DEVICE,VECTOR,0
 !*  
-!Êä³öÓ¦Á¦
+!è¾“å‡ºåº”åŠ›
 ALLSEL,ALL  
 PLNSOL,S,EQV
 /SHOW,PNG,,0
@@ -145,7 +145,7 @@ PNGR,TMOD,1
 /SHOW,CLOSE 
 /DEVICE,VECTOR,0
 !*  
-!Êä³öÍ¼Æ¬½áÊø
+!è¾“å‡ºå›¾ç‰‡ç»“æŸ
 
 *DIM,FANLI01,ARRAY,6,4
 FANLI01(1,1)=node01
@@ -195,22 +195,22 @@ FANLI01(6,1)=node06
 
 
 
-!µÚ¶þÖÖ¹¤¿ö
+!ç¬¬äºŒç§å·¥å†µ
 
 /SOLU
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v/4
 FK,b,FZ,-f_v/4
 FK,c,FZ,-f_v/4
 FK,d,FZ,-f_v/4
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,0
 FK,b,FX,f_m+f_h/2.828
 FK,c,FX,f_h/2.828
 FK,d,FX,-f_m
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,-f_h/2.828-f_m
 FK,b,FY,-f_h/2.828
 FK,c,FY,f_m
@@ -218,9 +218,9 @@ FK,d,FY,0
 
 SOLVE
 /POST1
-!¿ªÊ¼Êä³öÍ¼Æ¬
+!å¼€å§‹è¾“å‡ºå›¾ç‰‡
 ALLSEL,ALL 
-!Êä³öÕûÌåXÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Xä½ç§»
 PLNSOL,U,X,0,1
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -239,7 +239,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåYÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Yä½ç§»
 PLNSOL,U,Y,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -258,7 +258,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåZÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Zä½ç§»
 PLNSOL,U,Z,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -276,7 +276,7 @@ PNGR,TMOD,1
 /SHOW,CLOSE 
 /DEVICE,VECTOR,0
 !*  
-!Êä³öÓ¦Á¦
+!è¾“å‡ºåº”åŠ›
 ALLSEL,ALL  
 PLNSOL,S,EQV
 /SHOW,PNG,,0
@@ -295,7 +295,7 @@ PNGR,TMOD,1
 /SHOW,CLOSE 
 /DEVICE,VECTOR,0
 !*  
-!Êä³öÍ¼Æ¬½áÊø
+!è¾“å‡ºå›¾ç‰‡ç»“æŸ
 *DIM,FANLI02,ARRAY,6,4
 FANLI02(1,1)=node01
 FANLI02(2,1)=node02
@@ -343,23 +343,23 @@ FANLI02(6,1)=node06
 
 
 
-!µÚÈýÖÖ¹¤¿ö
+!ç¬¬ä¸‰ç§å·¥å†µ
 
 
 /SOLU
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v/4
 FK,b,FZ,-f_v/4
 FK,c,FZ,-f_v/4
 FK,d,FZ,-f_v/4
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,0
 FK,b,FX,f_m+f_h/2
 FK,c,FX,f_h/2
 FK,d,FX,-f_m
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,-f_m
 FK,b,FY,0
 FK,c,FY,f_m
@@ -367,9 +367,9 @@ FK,d,FY,0
 
 SOLVE
 /POST1
-!¿ªÊ¼Êä³öÍ¼Æ¬
+!å¼€å§‹è¾“å‡ºå›¾ç‰‡
 ALLSEL,ALL 
-!Êä³öÕûÌåXÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Xä½ç§»
 PLNSOL,U,X,0,1
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -388,7 +388,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåYÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Yä½ç§»
 PLNSOL,U,Y,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -407,7 +407,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåZÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Zä½ç§»
 PLNSOL,U,Z,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -425,7 +425,7 @@ PNGR,TMOD,1
 /SHOW,CLOSE 
 /DEVICE,VECTOR,0
 !*  
-!Êä³öÓ¦Á¦
+!è¾“å‡ºåº”åŠ›
 ALLSEL,ALL  
 PLNSOL,S,EQV
 /SHOW,PNG,,0
@@ -444,7 +444,7 @@ PNGR,TMOD,1
 /SHOW,CLOSE 
 /DEVICE,VECTOR,0
 !*  
-!Êä³öÍ¼Æ¬½áÊø
+!è¾“å‡ºå›¾ç‰‡ç»“æŸ
 *DIM,FANLI03,ARRAY,6,4
 FANLI03(1,1)=node01
 FANLI03(2,1)=node02
@@ -490,22 +490,22 @@ FANLI03(6,1)=node06
 
 *CFCLOS
 
-!µÚËÄÖÖ¹¤¿ö
+!ç¬¬å››ç§å·¥å†µ
 
 /SOLU
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v/4
 FK,b,FZ,-f_v/4
 FK,c,FZ,-f_v/4
 FK,d,FZ,-f_v/4
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,0
 FK,b,FX,f_m+f_h/2.828
 FK,c,FX,f_h/2.828
 FK,d,FX,-f_m
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,-f_m
 FK,b,FY,0
 FK,c,FY,f_m+f_h/2.828
@@ -513,9 +513,9 @@ FK,d,FY,f_h/2.828
 
 SOLVE
 /POST1
-!¿ªÊ¼Êä³öÍ¼Æ¬
+!å¼€å§‹è¾“å‡ºå›¾ç‰‡
 ALLSEL,ALL 
-!Êä³öÕûÌåXÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Xä½ç§»
 PLNSOL,U,X,0,1
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -534,7 +534,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåYÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Yä½ç§»
 PLNSOL,U,Y,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -553,7 +553,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåZÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Zä½ç§»
 PLNSOL,U,Z,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -571,7 +571,7 @@ PNGR,TMOD,1
 /SHOW,CLOSE 
 /DEVICE,VECTOR,0
 !*  
-!Êä³öÓ¦Á¦
+!è¾“å‡ºåº”åŠ›
 ALLSEL,ALL  
 PLNSOL,S,EQV
 /SHOW,PNG,,0
@@ -590,7 +590,7 @@ PNGR,TMOD,1
 /SHOW,CLOSE 
 /DEVICE,VECTOR,0
 !*  
-!Êä³öÍ¼Æ¬½áÊø
+!è¾“å‡ºå›¾ç‰‡ç»“æŸ
 *DIM,FANLI04,ARRAY,6,4
 FANLI04(1,1)=node01
 FANLI04(2,1)=node02
@@ -638,23 +638,23 @@ FANLI04(6,1)=node06
 
 
 
-!µÚÎåÖÖ¹¤¿ö
+!ç¬¬äº”ç§å·¥å†µ
 
 
 /SOLU
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v/4
 FK,b,FZ,-f_v/4
 FK,c,FZ,-f_v/4
 FK,d,FZ,-f_v/4
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,0
 FK,b,FX,f_m
 FK,c,FX,0
 FK,d,FX,-f_m
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,-f_m
 FK,b,FY,0
 FK,c,FY,f_m+f_h/2
@@ -662,9 +662,9 @@ FK,d,FY,f_h/2
 
 SOLVE
 /POST1
-!¿ªÊ¼Êä³öÍ¼Æ¬
+!å¼€å§‹è¾“å‡ºå›¾ç‰‡
 ALLSEL,ALL 
-!Êä³öÕûÌåXÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Xä½ç§»
 PLNSOL,U,X,0,1
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -683,7 +683,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåYÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Yä½ç§»
 PLNSOL,U,Y,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -702,7 +702,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåZÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Zä½ç§»
 PLNSOL,U,Z,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -720,7 +720,7 @@ PNGR,TMOD,1
 /SHOW,CLOSE 
 /DEVICE,VECTOR,0
 !*  
-!Êä³öÓ¦Á¦
+!è¾“å‡ºåº”åŠ›
 ALLSEL,ALL  
 PLNSOL,S,EQV
 /SHOW,PNG,,0
@@ -739,7 +739,7 @@ PNGR,TMOD,1
 /SHOW,CLOSE 
 /DEVICE,VECTOR,0
 !*  
-!Êä³öÍ¼Æ¬½áÊø
+!è¾“å‡ºå›¾ç‰‡ç»“æŸ
 *DIM,FANLI05,ARRAY,6,4
 FANLI05(1,1)=node01
 FANLI05(2,1)=node02
@@ -787,23 +787,23 @@ FANLI05(6,1)=node06
 
 
 
-!µÚÁùÖÖ¹¤¿ö
+!ç¬¬å…­ç§å·¥å†µ
 
 
 /SOLU
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v/4
 FK,b,FZ,-f_v/4
 FK,c,FZ,-f_v/4
 FK,d,FZ,-f_v/4
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,-f_h/2.828
 FK,b,FX,f_m
 FK,c,FX,0
 FK,d,FX,-f_m-f_h/2.828
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,-f_m
 FK,b,FY,0
 FK,c,FY,f_m+f_h/2.828
@@ -811,9 +811,9 @@ FK,d,FY,f_h/2.828
 
 SOLVE
 /POST1
-!¿ªÊ¼Êä³öÍ¼Æ¬
+!å¼€å§‹è¾“å‡ºå›¾ç‰‡
 ALLSEL,ALL 
-!Êä³öÕûÌåXÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Xä½ç§»
 PLNSOL,U,X,0,1
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -832,7 +832,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåYÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Yä½ç§»
 PLNSOL,U,Y,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -851,7 +851,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåZÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Zä½ç§»
 PLNSOL,U,Z,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -869,7 +869,7 @@ PNGR,TMOD,1
 /SHOW,CLOSE 
 /DEVICE,VECTOR,0
 !*  
-!Êä³öÓ¦Á¦
+!è¾“å‡ºåº”åŠ›
 ALLSEL,ALL  
 PLNSOL,S,EQV
 /SHOW,PNG,,0
@@ -888,7 +888,7 @@ PNGR,TMOD,1
 /SHOW,CLOSE 
 /DEVICE,VECTOR,0
 !*  
-!Êä³öÍ¼Æ¬½áÊø
+!è¾“å‡ºå›¾ç‰‡ç»“æŸ
 *DIM,FANLI06,ARRAY,6,4
 FANLI06(1,1)=node01
 FANLI06(2,1)=node02
@@ -935,23 +935,23 @@ FANLI06(6,1)=node06
 
 
 
-!µÚÆßÖÖ¹¤¿ö
+!ç¬¬ä¸ƒç§å·¥å†µ
 
 
 /SOLU
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v/4
 FK,b,FZ,-f_v/4
 FK,c,FZ,-f_v/4
 FK,d,FZ,-f_v/4
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,-f_h/2
 FK,b,FX,f_m
 FK,c,FX,0
 FK,d,FX,-f_m-f_h/2
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,-f_m
 FK,b,FY,0
 FK,c,FY,f_m
@@ -959,9 +959,9 @@ FK,d,FY,0
 
 SOLVE
 /POST1
-!¿ªÊ¼Êä³öÍ¼Æ¬
+!å¼€å§‹è¾“å‡ºå›¾ç‰‡
 ALLSEL,ALL 
-!Êä³öÕûÌåXÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Xä½ç§»
 PLNSOL,U,X,0,1
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -980,7 +980,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåYÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Yä½ç§»
 PLNSOL,U,Y,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -999,7 +999,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåZÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Zä½ç§»
 PLNSOL,U,Z,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -1017,7 +1017,7 @@ PNGR,TMOD,1
 /SHOW,CLOSE 
 /DEVICE,VECTOR,0
 !*  
-!Êä³öÓ¦Á¦
+!è¾“å‡ºåº”åŠ›
 ALLSEL,ALL  
 PLNSOL,S,EQV
 /SHOW,PNG,,0
@@ -1036,7 +1036,7 @@ PNGR,TMOD,1
 /SHOW,CLOSE 
 /DEVICE,VECTOR,0
 !*  
-!Êä³öÍ¼Æ¬½áÊø
+!è¾“å‡ºå›¾ç‰‡ç»“æŸ
 *DIM,FANLI07,ARRAY,6,4
 FANLI07(1,1)=node01
 FANLI07(2,1)=node02
@@ -1084,23 +1084,23 @@ FANLI07(6,1)=node06
 
 
 
-!µÚ°ËÖÖ¹¤¿ö
+!ç¬¬å…«ç§å·¥å†µ
 
 
 /SOLU
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v/4
 FK,b,FZ,-f_v/4
 FK,c,FZ,-f_v/4
 FK,d,FZ,-f_v/4
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,-f_h/2.828
 FK,b,FX,f_m
 FK,c,FX,0
 FK,d,FX,-f_m-f_h/2.828
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,-f_m-f_h/2.828
 FK,b,FY,-f_h/2.828
 FK,c,FY,f_m
@@ -1108,9 +1108,9 @@ FK,d,FY,0
 
 SOLVE
 /POST1
-!¿ªÊ¼Êä³öÍ¼Æ¬
+!å¼€å§‹è¾“å‡ºå›¾ç‰‡
 ALLSEL,ALL 
-!Êä³öÕûÌåXÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Xä½ç§»
 PLNSOL,U,X,0,1
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -1129,7 +1129,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåYÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Yä½ç§»
 PLNSOL,U,Y,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -1148,7 +1148,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåZÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Zä½ç§»
 PLNSOL,U,Z,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -1166,7 +1166,7 @@ PNGR,TMOD,1
 /SHOW,CLOSE 
 /DEVICE,VECTOR,0
 !*  
-!Êä³öÓ¦Á¦
+!è¾“å‡ºåº”åŠ›
 ALLSEL,ALL  
 PLNSOL,S,EQV
 /SHOW,PNG,,0
@@ -1185,7 +1185,7 @@ PNGR,TMOD,1
 /SHOW,CLOSE 
 /DEVICE,VECTOR,0
 !*  
-!Êä³öÍ¼Æ¬½áÊø
+!è¾“å‡ºå›¾ç‰‡ç»“æŸ
 *DIM,FANLI08,ARRAY,6,4
 FANLI08(1,1)=node01
 FANLI08(2,1)=node02

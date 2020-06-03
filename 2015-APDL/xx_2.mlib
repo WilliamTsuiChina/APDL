@@ -1,18 +1,18 @@
 x01
-!µÚÒ»ÖÖ¹¤¿ö
-!ËÄµã¼ÓÔØ£¨1.2´¹Ö±Á¦+1.4Ë®Æ½Á¦+1.4Å¤Á¦£©¼ÆËãºê
-!ÊäÈëµÄÁ¦¾ùÎªº¬ÏµÊýµÄÖµ£¬Å¤Á¦¼ÓÔØ°´ÕÕÄæÊ±Õë·½Ïò
-!²ÎÊýË³Ðò£¨a±àºÅ£¬b±àºÅ£¬c±àºÅ£¬d±àºÅ£¬´¹Ö±Á¦£¬Ë®Æ½Á¦£¬Å¤Á¦£©
-!×ø±ê·½ÏòÃæÏòÇ½ÎªÕýy,ÏòÉÏÎªÕýz
-!a,b,c,dÊäÈëµÄÎª¹Ø¼üµã±àºÅ
-!Å¤Á¦Îª·ÖÁ¦,ËùÓÐÁ¦µÄµ¥Î»ÎªN
-!·ÅÔÚ¹¤×÷Ä¿Â¼ÏÂ£¬ÏÈÓÃÃüÁî¡®*ULIB,xx,mlib¡¯¼ÓÔØ¿â
-!È»ºóÓÃ¡®*USE,x01,a±àºÅ,b±àºÅ,c±àºÅ,d±àºÅ,´¹Ö±Á¦,Ë®Æ½Á¦,Å¤Á¦¡¯µ÷ÓÃ¼ÆËã
-!°ËÖÖ¹¤¿ö¼ÆËãºêÃûÒÀ´ÎÎªx01,x02,x03,x04,x05,x06,x07,x08
-!2015.03.20³õ°æ
-!ÌáÇ°ÉèÖÃºÃÔª¼þ,Ãû³ÆÎªshuiping,xiecheng,zhuliang
+!ç¬¬ä¸€ç§å·¥å†µ
+!å››ç‚¹åŠ è½½ï¼ˆ1.2åž‚ç›´åŠ›+1.4æ°´å¹³åŠ›+1.4æ‰­åŠ›ï¼‰è®¡ç®—å®
+!è¾“å…¥çš„åŠ›å‡ä¸ºå«ç³»æ•°çš„å€¼ï¼Œæ‰­åŠ›åŠ è½½æŒ‰ç…§é€†æ—¶é’ˆæ–¹å‘
+!å‚æ•°é¡ºåºï¼ˆaç¼–å·ï¼Œbç¼–å·ï¼Œcç¼–å·ï¼Œdç¼–å·ï¼Œåž‚ç›´åŠ›ï¼Œæ°´å¹³åŠ›ï¼Œæ‰­åŠ›ï¼‰
+!åæ ‡æ–¹å‘é¢å‘å¢™ä¸ºæ­£y,å‘ä¸Šä¸ºæ­£z
+!a,b,c,dè¾“å…¥çš„ä¸ºå…³é”®ç‚¹ç¼–å·
+!æ‰­åŠ›ä¸ºåˆ†åŠ›,æ‰€æœ‰åŠ›çš„å•ä½ä¸ºN
+!æ”¾åœ¨å·¥ä½œç›®å½•ä¸‹ï¼Œå…ˆç”¨å‘½ä»¤â€˜*ULIB,xx,mlibâ€™åŠ è½½åº“
+!ç„¶åŽç”¨â€˜*USE,x01,aç¼–å·,bç¼–å·,cç¼–å·,dç¼–å·,åž‚ç›´åŠ›,æ°´å¹³åŠ›,æ‰­åŠ›â€™è°ƒç”¨è®¡ç®—
+!å…«ç§å·¥å†µè®¡ç®—å®åä¾æ¬¡ä¸ºx01,x02,x03,x04,x05,x06,x07,x08
+!2015.03.20åˆç‰ˆ
+!æå‰è®¾ç½®å¥½å…ƒä»¶,åç§°ä¸ºshuiping,xiecheng,zhuliang
 
-!³õÊ¼¸³Öµ
+!åˆå§‹èµ‹å€¼
 a = arg1
 b = arg2
 c = arg3
@@ -23,19 +23,19 @@ f_m = arg7
 
 /SOLU
 
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v/4
 FK,b,FZ,-f_v/4
 FK,c,FZ,-f_v/4
 FK,d,FZ,-f_v/4
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,0
 FK,b,FX,f_m
 FK,c,FX,0
 FK,d,FX,-f_m
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,-f_h/2-f_m
 FK,b,FY,-f_h/2
 FK,c,FY,f_m
@@ -46,7 +46,7 @@ SOLVE
 /POST1
 
 ALLSEL,ALL 
-!Êä³öÕûÌåXÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Xä½ç§»
 PLNSOL,U,X,0,1
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -65,7 +65,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåYÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Yä½ç§»
 PLNSOL,U,Y,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -84,7 +84,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåZÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Zä½ç§»
 PLNSOL,U,Z,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -103,7 +103,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Êä³öË®Æ½¸ËÓ¦Á¦
+!è¾“å‡ºæ°´å¹³æ†åº”åŠ›
 CMSEL,S,SHUIPING
 ESEL,ALL
 ESLL,S  
@@ -125,7 +125,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Êä³öÐ±³Å¸ËÓ¦Á¦
+!è¾“å‡ºæ–œæ’‘æ†åº”åŠ›
 CMSEL,S,XIECHENG
 ESEL,ALL
 ESLL,S  
@@ -147,7 +147,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !* 
 
-!Êä³öÖ÷ÁºÓ¦Á¦ 
+!è¾“å‡ºä¸»æ¢åº”åŠ› 
 CMSEL,S,ZHULIANG
 ESEL,ALL
 ESLL,S  
@@ -169,14 +169,14 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Ñ¡ÔñËùÓÐ
+!é€‰æ‹©æ‰€æœ‰
 ALLSEL,ALL 
 
 /EOF
 
 x02
-!µÚ¶þÖÖ¹¤¿ö
-!³õÊ¼¸³Öµ
+!ç¬¬äºŒç§å·¥å†µ
+!åˆå§‹èµ‹å€¼
 a = arg1
 b = arg2
 c = arg3
@@ -185,19 +185,19 @@ f_v = arg5
 f_h = arg6
 f_m = arg7
 /SOLU
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v/4
 FK,b,FZ,-f_v/4
 FK,c,FZ,-f_v/4
 FK,d,FZ,-f_v/4
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,0
 FK,b,FX,f_m+f_h/2.828
 FK,c,FX,f_h/2.828
 FK,d,FX,-f_m
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,-f_h/2.828-f_m
 FK,b,FY,-f_h/2.828
 FK,c,FY,f_m
@@ -206,7 +206,7 @@ FK,d,FY,0
 SOLVE
 /POST1
 ALLSEL,ALL 
-!Êä³öÕûÌåXÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Xä½ç§»
 PLNSOL,U,X,0,1
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -225,7 +225,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåYÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Yä½ç§»
 PLNSOL,U,Y,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -244,7 +244,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåZÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Zä½ç§»
 PLNSOL,U,Z,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -263,7 +263,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Êä³öË®Æ½¸ËÓ¦Á¦
+!è¾“å‡ºæ°´å¹³æ†åº”åŠ›
 CMSEL,S,SHUIPING
 ESEL,ALL
 ESLL,S  
@@ -285,7 +285,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Êä³öÐ±³Å¸ËÓ¦Á¦
+!è¾“å‡ºæ–œæ’‘æ†åº”åŠ›
 CMSEL,S,XIECHENG
 ESEL,ALL
 ESLL,S  
@@ -307,7 +307,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !* 
 
-!Êä³öÖ÷ÁºÓ¦Á¦ 
+!è¾“å‡ºä¸»æ¢åº”åŠ› 
 CMSEL,S,ZHULIANG
 ESEL,ALL
 ESLL,S  
@@ -329,14 +329,14 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Ñ¡ÔñËùÓÐ
+!é€‰æ‹©æ‰€æœ‰
 ALLSEL,ALL 
 
 /EOF
 
 x03
-!µÚÈýÖÖ¹¤¿ö
-!³õÊ¼¸³Öµ
+!ç¬¬ä¸‰ç§å·¥å†µ
+!åˆå§‹èµ‹å€¼
 a = arg1
 b = arg2
 c = arg3
@@ -345,19 +345,19 @@ f_v = arg5
 f_h = arg6
 f_m = arg7
 /SOLU
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v/4
 FK,b,FZ,-f_v/4
 FK,c,FZ,-f_v/4
 FK,d,FZ,-f_v/4
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,0
 FK,b,FX,f_m+f_h/2
 FK,c,FX,f_h/2
 FK,d,FX,-f_m
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,-f_m
 FK,b,FY,0
 FK,c,FY,f_m
@@ -366,7 +366,7 @@ FK,d,FY,0
 SOLVE
 /POST1
 ALLSEL,ALL 
-!Êä³öÕûÌåXÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Xä½ç§»
 PLNSOL,U,X,0,1
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -385,7 +385,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåYÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Yä½ç§»
 PLNSOL,U,Y,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -404,7 +404,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåZÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Zä½ç§»
 PLNSOL,U,Z,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -423,7 +423,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Êä³öË®Æ½¸ËÓ¦Á¦
+!è¾“å‡ºæ°´å¹³æ†åº”åŠ›
 CMSEL,S,SHUIPING
 ESEL,ALL
 ESLL,S  
@@ -445,7 +445,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Êä³öÐ±³Å¸ËÓ¦Á¦
+!è¾“å‡ºæ–œæ’‘æ†åº”åŠ›
 CMSEL,S,XIECHENG
 ESEL,ALL
 ESLL,S  
@@ -467,7 +467,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !* 
 
-!Êä³öÖ÷ÁºÓ¦Á¦ 
+!è¾“å‡ºä¸»æ¢åº”åŠ› 
 CMSEL,S,ZHULIANG
 ESEL,ALL
 ESLL,S  
@@ -489,14 +489,14 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Ñ¡ÔñËùÓÐ
+!é€‰æ‹©æ‰€æœ‰
 ALLSEL,ALL 
 
 /EOF
 
 x04
-!µÚËÄÖÖ¹¤¿ö
-!³õÊ¼¸³Öµ
+!ç¬¬å››ç§å·¥å†µ
+!åˆå§‹èµ‹å€¼
 a = arg1
 b = arg2
 c = arg3
@@ -505,19 +505,19 @@ f_v = arg5
 f_h = arg6
 f_m = arg7
 /SOLU
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v/4
 FK,b,FZ,-f_v/4
 FK,c,FZ,-f_v/4
 FK,d,FZ,-f_v/4
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,0
 FK,b,FX,f_m+f_h/2.828
 FK,c,FX,f_h/2.828
 FK,d,FX,-f_m
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,-f_m
 FK,b,FY,0
 FK,c,FY,f_m+f_h/2.828
@@ -526,7 +526,7 @@ FK,d,FY,f_h/2.828
 SOLVE
 /POST1
 ALLSEL,ALL 
-!Êä³öÕûÌåXÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Xä½ç§»
 PLNSOL,U,X,0,1
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -545,7 +545,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåYÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Yä½ç§»
 PLNSOL,U,Y,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -564,7 +564,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåZÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Zä½ç§»
 PLNSOL,U,Z,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -583,7 +583,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Êä³öË®Æ½¸ËÓ¦Á¦
+!è¾“å‡ºæ°´å¹³æ†åº”åŠ›
 CMSEL,S,SHUIPING
 ESEL,ALL
 ESLL,S  
@@ -605,7 +605,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Êä³öÐ±³Å¸ËÓ¦Á¦
+!è¾“å‡ºæ–œæ’‘æ†åº”åŠ›
 CMSEL,S,XIECHENG
 ESEL,ALL
 ESLL,S  
@@ -627,7 +627,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !* 
 
-!Êä³öÖ÷ÁºÓ¦Á¦ 
+!è¾“å‡ºä¸»æ¢åº”åŠ› 
 CMSEL,S,ZHULIANG
 ESEL,ALL
 ESLL,S  
@@ -649,14 +649,14 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Ñ¡ÔñËùÓÐ
+!é€‰æ‹©æ‰€æœ‰
 ALLSEL,ALL 
 
 /EOF
 
 x05
-!µÚÎåÖÖ¹¤¿ö
-!³õÊ¼¸³Öµ
+!ç¬¬äº”ç§å·¥å†µ
+!åˆå§‹èµ‹å€¼
 a = arg1
 b = arg2
 c = arg3
@@ -665,19 +665,19 @@ f_v = arg5
 f_h = arg6
 f_m = arg7
 /SOLU
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v/4
 FK,b,FZ,-f_v/4
 FK,c,FZ,-f_v/4
 FK,d,FZ,-f_v/4
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,0
 FK,b,FX,f_m
 FK,c,FX,0
 FK,d,FX,-f_m
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,-f_m
 FK,b,FY,0
 FK,c,FY,f_m+f_h/2
@@ -686,7 +686,7 @@ FK,d,FY,f_h/2
 SOLVE
 /POST1
 ALLSEL,ALL 
-!Êä³öÕûÌåXÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Xä½ç§»
 PLNSOL,U,X,0,1
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -705,7 +705,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåYÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Yä½ç§»
 PLNSOL,U,Y,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -724,7 +724,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåZÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Zä½ç§»
 PLNSOL,U,Z,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -743,7 +743,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Êä³öË®Æ½¸ËÓ¦Á¦
+!è¾“å‡ºæ°´å¹³æ†åº”åŠ›
 CMSEL,S,SHUIPING
 ESEL,ALL
 ESLL,S  
@@ -765,7 +765,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Êä³öÐ±³Å¸ËÓ¦Á¦
+!è¾“å‡ºæ–œæ’‘æ†åº”åŠ›
 CMSEL,S,XIECHENG
 ESEL,ALL
 ESLL,S  
@@ -787,7 +787,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !* 
 
-!Êä³öÖ÷ÁºÓ¦Á¦ 
+!è¾“å‡ºä¸»æ¢åº”åŠ› 
 CMSEL,S,ZHULIANG
 ESEL,ALL
 ESLL,S  
@@ -809,14 +809,14 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Ñ¡ÔñËùÓÐ
+!é€‰æ‹©æ‰€æœ‰
 ALLSEL,ALL 
 
 /EOF
 
 x06
-!µÚÁùÖÖ¹¤¿ö
-!³õÊ¼¸³Öµ
+!ç¬¬å…­ç§å·¥å†µ
+!åˆå§‹èµ‹å€¼
 a = arg1
 b = arg2
 c = arg3
@@ -825,19 +825,19 @@ f_v = arg5
 f_h = arg6
 f_m = arg7
 /SOLU
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v/4
 FK,b,FZ,-f_v/4
 FK,c,FZ,-f_v/4
 FK,d,FZ,-f_v/4
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,-f_h/2.828
 FK,b,FX,f_m
 FK,c,FX,0
 FK,d,FX,-f_m-f_h/2.828
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,-f_m
 FK,b,FY,0
 FK,c,FY,f_m+f_h/2.828
@@ -846,7 +846,7 @@ FK,d,FY,f_h/2.828
 SOLVE
 /POST1
 ALLSEL,ALL 
-!Êä³öÕûÌåXÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Xä½ç§»
 PLNSOL,U,X,0,1
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -865,7 +865,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåYÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Yä½ç§»
 PLNSOL,U,Y,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -884,7 +884,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåZÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Zä½ç§»
 PLNSOL,U,Z,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -903,7 +903,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Êä³öË®Æ½¸ËÓ¦Á¦
+!è¾“å‡ºæ°´å¹³æ†åº”åŠ›
 CMSEL,S,SHUIPING
 ESEL,ALL
 ESLL,S  
@@ -925,7 +925,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Êä³öÐ±³Å¸ËÓ¦Á¦
+!è¾“å‡ºæ–œæ’‘æ†åº”åŠ›
 CMSEL,S,XIECHENG
 ESEL,ALL
 ESLL,S  
@@ -947,7 +947,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !* 
 
-!Êä³öÖ÷ÁºÓ¦Á¦ 
+!è¾“å‡ºä¸»æ¢åº”åŠ› 
 CMSEL,S,ZHULIANG
 ESEL,ALL
 ESLL,S  
@@ -969,14 +969,14 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Ñ¡ÔñËùÓÐ
+!é€‰æ‹©æ‰€æœ‰
 ALLSEL,ALL 
 
 /EOF
 
 x07
-!µÚÆßÖÖ¹¤¿ö
-!³õÊ¼¸³Öµ
+!ç¬¬ä¸ƒç§å·¥å†µ
+!åˆå§‹èµ‹å€¼
 a = arg1
 b = arg2
 c = arg3
@@ -985,19 +985,19 @@ f_v = arg5
 f_h = arg6
 f_m = arg7
 /SOLU
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v/4
 FK,b,FZ,-f_v/4
 FK,c,FZ,-f_v/4
 FK,d,FZ,-f_v/4
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,-f_h/2
 FK,b,FX,f_m
 FK,c,FX,0
 FK,d,FX,-f_m-f_h/2
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,-f_m
 FK,b,FY,0
 FK,c,FY,f_m
@@ -1006,7 +1006,7 @@ FK,d,FY,0
 SOLVE
 /POST1
 ALLSEL,ALL 
-!Êä³öÕûÌåXÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Xä½ç§»
 PLNSOL,U,X,0,1
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -1025,7 +1025,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåYÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Yä½ç§»
 PLNSOL,U,Y,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -1044,7 +1044,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåZÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Zä½ç§»
 PLNSOL,U,Z,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -1063,7 +1063,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Êä³öË®Æ½¸ËÓ¦Á¦
+!è¾“å‡ºæ°´å¹³æ†åº”åŠ›
 CMSEL,S,SHUIPING
 ESEL,ALL
 ESLL,S  
@@ -1085,7 +1085,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Êä³öÐ±³Å¸ËÓ¦Á¦
+!è¾“å‡ºæ–œæ’‘æ†åº”åŠ›
 CMSEL,S,XIECHENG
 ESEL,ALL
 ESLL,S  
@@ -1107,7 +1107,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !* 
 
-!Êä³öÖ÷ÁºÓ¦Á¦ 
+!è¾“å‡ºä¸»æ¢åº”åŠ› 
 CMSEL,S,ZHULIANG
 ESEL,ALL
 ESLL,S  
@@ -1129,14 +1129,14 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Ñ¡ÔñËùÓÐ
+!é€‰æ‹©æ‰€æœ‰
 ALLSEL,ALL 
 
 /EOF
 
 x08
-!µÚ°ËÖÖ¹¤¿ö
-!³õÊ¼¸³Öµ
+!ç¬¬å…«ç§å·¥å†µ
+!åˆå§‹èµ‹å€¼
 a = arg1
 b = arg2
 c = arg3
@@ -1145,19 +1145,19 @@ f_v = arg5
 f_h = arg6
 f_m = arg7
 /SOLU
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v/4
 FK,b,FZ,-f_v/4
 FK,c,FZ,-f_v/4
 FK,d,FZ,-f_v/4
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,-f_h/2.828
 FK,b,FX,f_m
 FK,c,FX,0
 FK,d,FX,-f_m-f_h/2.828
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,-f_m-f_h/2.828
 FK,b,FY,-f_h/2.828
 FK,c,FY,f_m
@@ -1166,7 +1166,7 @@ FK,d,FY,0
 SOLVE
 /POST1
 ALLSEL,ALL 
-!Êä³öÕûÌåXÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Xä½ç§»
 PLNSOL,U,X,0,1
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -1185,7 +1185,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåYÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Yä½ç§»
 PLNSOL,U,Y,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -1204,7 +1204,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 ALLSEL,ALL 
-!Êä³öÕûÌåZÎ»ÒÆ
+!è¾“å‡ºæ•´ä½“Zä½ç§»
 PLNSOL,U,Z,0,1  
 /SHOW,PNG,,0
 PNGR,COMP,1,-1  
@@ -1223,7 +1223,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Êä³öË®Æ½¸ËÓ¦Á¦
+!è¾“å‡ºæ°´å¹³æ†åº”åŠ›
 CMSEL,S,SHUIPING
 ESEL,ALL
 ESLL,S  
@@ -1245,7 +1245,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Êä³öÐ±³Å¸ËÓ¦Á¦
+!è¾“å‡ºæ–œæ’‘æ†åº”åŠ›
 CMSEL,S,XIECHENG
 ESEL,ALL
 ESLL,S  
@@ -1267,7 +1267,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !* 
 
-!Êä³öÖ÷ÁºÓ¦Á¦ 
+!è¾“å‡ºä¸»æ¢åº”åŠ› 
 CMSEL,S,ZHULIANG
 ESEL,ALL
 ESLL,S  
@@ -1289,7 +1289,7 @@ PNGR,TMOD,1
 /DEVICE,VECTOR,0
 !*  
 
-!Ñ¡ÔñËùÓÐ
+!é€‰æ‹©æ‰€æœ‰
 ALLSEL,ALL 
 
 /EOF

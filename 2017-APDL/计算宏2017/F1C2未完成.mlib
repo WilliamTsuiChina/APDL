@@ -1,35 +1,35 @@
 F1C2
 
-!20170925 ÔÚF1C4»ù´¡ÉÏÐÞ¸Ä
-!Ò»¼ü¼ÆËã°ËÖÖ¹¤¿öÊÜÁ¦£¬×Ô¶¯µ¼³ö°ËÖÖ¹¤¿ö·´Á¦
-!×Ô¶¯»ã×Ü×î´ó·´Á¦°üÂçÖµ
-!½á¹û¿ÉÊÖ¶¯µ¼ÈëEXCEL£¬°´·Ö¸ô·û'|'·ÖÁÐ
+!20170925 åœ¨F1C4åŸºç¡€ä¸Šä¿®æ”¹
+!ä¸€é”®è®¡ç®—å…«ç§å·¥å†µå—åŠ›ï¼Œè‡ªåŠ¨å¯¼å‡ºå…«ç§å·¥å†µååŠ›
+!è‡ªåŠ¨æ±‡æ€»æœ€å¤§ååŠ›åŒ…ç»œå€¼
+!ç»“æžœå¯æ‰‹åŠ¨å¯¼å…¥EXCELï¼ŒæŒ‰åˆ†éš”ç¬¦'|'åˆ†åˆ—
 
-!ÊÊºÏÁ½µãÈý¸Ë¸½×Å¼ÆËã
+!é€‚åˆä¸¤ç‚¹ä¸‰æ†é™„ç€è®¡ç®—
 
-!1¡¢¼ÓÔØ±¾¿âÎÄ¼þ*ulib,F1C2,mlib
-!2¡¢µ÷ÓÃºê¼ÆËã*use,F1C2,(1¸ö¼ÓÔØkeypoint),(´¹Ö±=0|Ë®Æ½|Å¤¾Ø),(4¸öÔ¼Êønode)
+!1ã€åŠ è½½æœ¬åº“æ–‡ä»¶*ulib,F1C2,mlib
+!2ã€è°ƒç”¨å®è®¡ç®—*use,F1C2,(1ä¸ªåŠ è½½keypoint),(åž‚ç›´=0|æ°´å¹³|æ‰­çŸ©),(4ä¸ªçº¦æŸnode)
 
-!×¢Òâ£ºË®Æ½´¹Ö±¶¼ÊÇ¶ÖÎªµ¥Î»£¬ÏµÊý×Ô¼º¼Ó;Íä¾ØÊÇt.m
-!Ä³¸ö¼ÓÔØÁ¦¿ÉÎª0£¬²»ÄÜÁô¿Õ
-!½öÊÊÓÃÓÚ1µã¼ÓÔØ£¬4µãÖ§³Å
-!ÉÏ·½ÎªZ+
+!æ³¨æ„ï¼šæ°´å¹³åž‚ç›´éƒ½æ˜¯å¨ä¸ºå•ä½ï¼Œç³»æ•°è‡ªå·±åŠ ;å¼¯çŸ©æ˜¯t.m
+!æŸä¸ªåŠ è½½åŠ›å¯ä¸º0ï¼Œä¸èƒ½ç•™ç©º
+!ä»…é€‚ç”¨äºŽ1ç‚¹åŠ è½½ï¼Œ4ç‚¹æ”¯æ’‘
+!ä¸Šæ–¹ä¸ºZ+
 
 
-!Author:ÐìÃ÷
+!Author:å¾æ˜Ž
 !Mail:342668998@qq.com
 !HomePage:http://xuming.science/
 
-!³õÊ¼¸³Öµ
-!¼ÓÔØ¹Ø¼üµã±àºÅ
+!åˆå§‹èµ‹å€¼
+!åŠ è½½å…³é”®ç‚¹ç¼–å·
 a = arg1
 
-!µ¥Î»¸ÄÎªt£¬Ëõ¶ÌÃüÁî³¤¶È
+!å•ä½æ”¹ä¸ºtï¼Œç¼©çŸ­å‘½ä»¤é•¿åº¦
 f_v = arg2*10000
 f_h = arg3*10000
 f_m = arg4*10000000
 
-!Ö§×ù½Úµã±àºÅ
+!æ”¯åº§èŠ‚ç‚¹ç¼–å·
 node01 = arg5
 node02 = arg6
 node03 = arg7
@@ -43,39 +43,39 @@ X7 = 10000000
 ('-----REACTION-SOLUTIONS-----')
 *CFCLOS
 
-!µÚÒ»ÖÖ¹¤¿ö
+!ç¬¬ä¸€ç§å·¥å†µ
 
 /SOLU
 
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,0
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,-f_h
 
-!XÏòÍä¾Ø¼ÓÔØ
+!Xå‘å¼¯çŸ©åŠ è½½
 FK,a,MX,f_m
 
-!YÏòÍä¾Ø¼ÓÔØ
+!Yå‘å¼¯çŸ©åŠ è½½
 FK,a,MY,0
-!Å¤¾ØÇåÁã
+!æ‰­çŸ©æ¸…é›¶
 FK,a,MZ,0
 SOLVE
 
 /POST1
-!¶¨Òå8ÐÐ7ÁÐµÄÊý×é
+!å®šä¹‰8è¡Œ7åˆ—çš„æ•°ç»„
 *DIM,FANLI01,ARRAY,4,7
-!µÚÒ»ÁÐÊÇ½Úµã±àºÅ
+!ç¬¬ä¸€åˆ—æ˜¯èŠ‚ç‚¹ç¼–å·
 FANLI01(1,1)=node01
 FANLI01(2,1)=node02
 FANLI01(3,1)=node03
 FANLI01(4,1)=node04
 
 
-!µÚÒ»ÐÐ´ÓµÚ¶þÁÐ¿ªÊ¼ÊÇ½Úµã1µÄ½á¹û
+!ç¬¬ä¸€è¡Œä»Žç¬¬äºŒåˆ—å¼€å§‹æ˜¯èŠ‚ç‚¹1çš„ç»“æžœ
 *GET,FANLI01(1,2),NODE,node01,RF,FX
 *GET,FANLI01(1,3),NODE,node01,RF,FY
 *GET,FANLI01(1,4),NODE,node01,RF,FZ
@@ -121,24 +121,24 @@ FANLI01(4,1)=node04
 
 
 
-!µÚ¶þÖÖ¹¤¿ö
+!ç¬¬äºŒç§å·¥å†µ
 
 /SOLU
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,f_h/1.414
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,-f_h/1.414
 
-!XÏòÍä¾Ø¼ÓÔØ
+!Xå‘å¼¯çŸ©åŠ è½½
 FK,a,MX,f_m/1.414
 
-!YÏòÍä¾Ø¼ÓÔØ
+!Yå‘å¼¯çŸ©åŠ è½½
 FK,a,MY,f_m/1.414
-!Å¤¾ØÇåÁã
+!æ‰­çŸ©æ¸…é›¶
 FK,a,MZ,0
 SOLVE
 /POST1
@@ -194,26 +194,26 @@ FANLI02(4,1)=node04
 
 
 
-!µÚÈýÖÖ¹¤¿ö
+!ç¬¬ä¸‰ç§å·¥å†µ
 
 
 /SOLU
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,f_h
 
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,0
 
-!XÏòÍä¾Ø¼ÓÔØ
+!Xå‘å¼¯çŸ©åŠ è½½
 FK,a,MX,0
 
-!YÏòÍä¾Ø¼ÓÔØ
+!Yå‘å¼¯çŸ©åŠ è½½
 FK,a,MY,f_m
-!Å¤¾ØÇåÁã
+!æ‰­çŸ©æ¸…é›¶
 FK,a,MZ,0
 SOLVE
 /POST1
@@ -266,25 +266,25 @@ FANLI03(4,1)=node04
 
 *CFCLOS
 
-!µÚËÄÖÖ¹¤¿ö
+!ç¬¬å››ç§å·¥å†µ
 
 /SOLU
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,f_h/1.414
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,f_h/1.414
 
-!XÏòÍä¾Ø¼ÓÔØ
+!Xå‘å¼¯çŸ©åŠ è½½
 FK,a,MX,-f_m/1.414
 
-!YÏòÍä¾Ø¼ÓÔØ
+!Yå‘å¼¯çŸ©åŠ è½½
 FK,a,MY,f_m/1.414
 
-!Å¤¾ØÇåÁã
+!æ‰­çŸ©æ¸…é›¶
 FK,a,MZ,0
 SOLVE
 /POST1
@@ -338,25 +338,25 @@ FANLI04(4,1)=node04
 
 
 
-!µÚÎåÖÖ¹¤¿ö
+!ç¬¬äº”ç§å·¥å†µ
 
 
 /SOLU
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,0
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,f_h
 
-!XÏòÍä¾Ø¼ÓÔØ
+!Xå‘å¼¯çŸ©åŠ è½½
 FK,a,MX,-f_m
 
-!YÏòÍä¾Ø¼ÓÔØ
+!Yå‘å¼¯çŸ©åŠ è½½
 FK,a,MY,0
-!Å¤¾ØÇåÁã
+!æ‰­çŸ©æ¸…é›¶
 FK,a,MZ,0
 SOLVE
 /POST1
@@ -410,25 +410,25 @@ FANLI05(4,1)=node04
 
 
 
-!µÚÁùÖÖ¹¤¿ö
+!ç¬¬å…­ç§å·¥å†µ
 
 
 /SOLU
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,-f_h/1.414
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,f_h/1.414
 
-!XÏòÍä¾Ø¼ÓÔØ
+!Xå‘å¼¯çŸ©åŠ è½½
 FK,a,MX,-f_m/1.414
 
-!YÏòÍä¾Ø¼ÓÔØ
+!Yå‘å¼¯çŸ©åŠ è½½
 FK,a,MY,-f_m/1.414
-!Å¤¾ØÇåÁã
+!æ‰­çŸ©æ¸…é›¶
 FK,a,MZ,0
 SOLVE
 /POST1
@@ -481,25 +481,25 @@ FANLI06(4,1)=node04
 
 
 
-!µÚÆßÖÖ¹¤¿ö
+!ç¬¬ä¸ƒç§å·¥å†µ
 
 
 /SOLU
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,-f_h
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,0
 
-!XÏòÍä¾Ø¼ÓÔØ
+!Xå‘å¼¯çŸ©åŠ è½½
 FK,a,MX,0
 
-!YÏòÍä¾Ø¼ÓÔØ
+!Yå‘å¼¯çŸ©åŠ è½½
 FK,a,MY,-f_m
-!Å¤¾ØÇåÁã
+!æ‰­çŸ©æ¸…é›¶
 FK,a,MZ,0
 SOLVE
 /POST1
@@ -553,25 +553,25 @@ FANLI07(4,1)=node04
 
 
 
-!µÚ°ËÖÖ¹¤¿ö
+!ç¬¬å…«ç§å·¥å†µ
 
 
 /SOLU
-!Í¨ÓÃ´¹Ö±Á¦¼ÓÔØ
+!é€šç”¨åž‚ç›´åŠ›åŠ è½½
 FK,a,FZ,-f_v
 
-!XÏò¼ÓÔØ
+!Xå‘åŠ è½½
 FK,a,FX,-f_h/1.414
 
-!YÏò¼ÓÔØ
+!Yå‘åŠ è½½
 FK,a,FY,-f_h/1.414
 
-!XÏòÍä¾Ø¼ÓÔØ
+!Xå‘å¼¯çŸ©åŠ è½½
 FK,a,MX,f_m/1.414
 
-!YÏòÍä¾Ø¼ÓÔØ
+!Yå‘å¼¯çŸ©åŠ è½½
 FK,a,MY,-f_m/1.414
-!Å¤¾ØÇåÁã
+!æ‰­çŸ©æ¸…é›¶
 FK,a,MZ,0
 SOLVE
 /POST1
