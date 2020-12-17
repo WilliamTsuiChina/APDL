@@ -1,0 +1,76 @@
+!函数外部参数引入赋值
+argname1 = arg1
+argname2 = arg2
+
+!定义矩阵
+*DIM,FMAX,ARRAY,6,4
+*DIM,FMAX1,ARRAY,6,4
+*DIM,FMAX2,ARRAY,6,4
+*DIM,FMAX3,ARRAY,6,4
+*DIM,FMAX4,ARRAY,6,4
+*DIM,FMAX5,ARRAY,6,4
+*DIM,FMAX6,ARRAY,6,4
+
+!矩阵运算
+*VOPER,FMAX1(1,JJ),FANLI01(1,JJ),MAX,FANLI02(1,JJ)  !比较获得最大值
+*VOPER,FMIN1(1,NN),FANLI01(1,NN),MIN,FANLI02(1,NN)  !比较获得最小值
+*VABS,1,1,1 !使下面的运算数据变为绝对值
+*VOPER,FABS(1,KK),FMAX(1,KK),MAX,FMIN(1,KK)
+
+!对关键点加载
+FK,keypoint_num,FX,force1
+FK,keypoint_num,FY,force1
+FK,keypoint_num,FZ,force1
+
+!前处理
+ALLSEL,ALL   !选择所有
+CMSEL,S,SHUIPING   !通过名称选择组件
+ESEL,ALL   !选择所有单元
+ESLL,S   !选择附着在线上的单元
+
+!处理模块进入命令
+/SOLU  !进入求解模块
+SOLVE  !求解
+/POST1  !进入通用后处理
+
+!通用后处理
+PLNSOL,U,X,0,1  !显示X位移云图
+PLNSOL,U,Y,0,1  !显示Y位移云图
+PLNSOL,U,Z,0,1  !显示Z位移云图
+PLNSOL,S,EQV  !显示等效应力云图
+
+!输出图片
+/SHOW,PNG,,0
+PNGR,COMP,1,-1  
+PNGR,ORIENT,HORIZ   
+PNGR,COLOR,2
+PNGR,TMOD,1 
+/GFILE,800, 
+/CMAP,_TEMPCMAP_,CMP,,SAVE  
+/RGB,INDEX,100,100,100,0
+/RGB,INDEX,0,0,0,15 
+/REPLOT 
+/CMAP,_TEMPCMAP_,CMP
+/DELETE,_TEMPCMAP_,CMP  
+/SHOW,CLOSE 
+/DEVICE,VECTOR,0
+
+
+!提取节点反力
+*GET,FANLI01(1,2),NODE,node01,RF,FX
+*GET,FANLI01(1,3),NODE,node01,RF,FY
+*GET,FANLI01(1,4),NODE,node01,RF,FZ
+
+
+!输出文本命令
+*CFOPEN,TheResult,txt,,Append
+*VWRITE,
+('Enter Your Text')
+*VWRITE,
+('Condition-1')
+*VWRITE,'Node','F_X','F_Y','F_Z'
+(A8,'|',A12,'|',A12,'|',A12)
+*VWRITE,FANLI01(1,1),FANLI01(1,2),FANLI01(1,3),FANLI01(1,4)
+(F8.0,'|',E12.4E2,'|',E12.4E2,'|',E12.4E2)
+*CFCLOS
+
