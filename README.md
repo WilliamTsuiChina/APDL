@@ -1,8 +1,6 @@
 # zsmacro
 
-macros for tower crane structural analysis
-
-ansys macros for some calculations
+some macros for APDL in ANSYS
 
 此项目为工作中用到的apdl脚本
 
