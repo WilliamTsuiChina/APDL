@@ -10,8 +10,10 @@ some macros for APDL in ANSYS
 
 ## 文件说明
 
-MyPrepare.mac——前处理定义参数宏，放置于“C:\Program Files\ANSYS Inc\v191\ansys\apdl”
+* MyPrepare.mac——前处理定义参数宏，放置于“C:\Program Files\ANSYS Inc\v191\ansys\apdl”
 
-start.ans——快捷工具栏自定义，可覆盖或修改“C:\Program Files\ANSYS Inc\v191\ansys\apdl\start.ans”
+* start.ans——快捷工具栏自定义，可覆盖或修改“C:\Program Files\ANSYS Inc\v191\ansys\apdl\start.ans”
 
-workbench-APDL.mac——在workbench模式中修改几何体单元类型的命令
+* workbench-APDL.mac——在workbench模式中修改几何体单元类型的命令
+
+* GoodPart.mac——收集汇总用到的命令
