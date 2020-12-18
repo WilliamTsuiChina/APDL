@@ -18,18 +18,42 @@ argname2 = arg2
 *VOPER,FABS(1,KK),FMAX(1,KK),MAX,FMIN(1,KK)
 
 !对关键点加载
-FK,keypoint_num,FX,force1
-FK,keypoint_num,FY,force1
-FK,keypoint_num,FZ,force1
+FK,keypoint_num,FX,forcex
+FK,keypoint_num,FY,forcey
+FK,keypoint_num,FZ,forcez
+
+FK,keypoint_num,MX,momentx
+FK,keypoint_num,MY,momenty
+FK,keypoint_num,MZ,momentz
 
 !前处理
 ALLSEL,ALL   !选择所有
 CMSEL,S,SHUIPING   !通过名称选择组件
 ESEL,ALL   !选择所有单元
 ESLL,S   !选择附着在线上的单元
+*AFUN,DEG  !定义角度制
+!!!!!!!定义单元类型、材料属性
+ET,1,BEAM188   !1号单元，主体结构
+MP,EX,1,2.1E5
+MP,PRXY,1,0.3
+MP,DENS,1,7.85E-9
+ET,2,LINK10  !2号单元，拉索
+R,2,ALINK
+MP,EX,2,1.05E5    
+MP,DENS,2,7.85E-9
+KEYOPT,2,3,0     !1表示仅受压，0表示仅受拉
+ET,3,SHELL181   !3号单元，板
+!!!!!!!旋转所有
+CSYS,0
+CLOCAL,1001,0,0,0,0,0,DETA,0
+CSYS,1001
+TRANSFER,0,0,ALL
+CSYS,0
+CSDELE,ALL
 
 !处理模块进入命令
 /SOLU  !进入求解模块
+NLGEOM,ON!打开大变形开关
 SOLVE  !求解
 /POST1  !进入通用后处理
 
@@ -38,6 +62,15 @@ PLNSOL,U,X,0,1  !显示X位移云图
 PLNSOL,U,Y,0,1  !显示Y位移云图
 PLNSOL,U,Z,0,1  !显示Z位移云图
 PLNSOL,S,EQV  !显示等效应力云图
+!提取最大X向位移-侧向
+NSORT,U,X,0,1,ALL
+*GET,TP1,SORT,0,MAX
+!提取单元截面积
+*GET,TP1,ELEM,1,SMISC,13
+!提取单元轴力
+*GET,TP1,ELEM,I,SMISC,1
+!提取单元应力
+*GET,TP2,ELEM,I,SMISC,31
 
 !输出图片
 /SHOW,PNG,,0

@@ -1,5 +1,0 @@
-et,matid,link10
-r,matid,4534  !拉锁面积
-mp,ex,matid,210000
-mp,dens,matid,7.85e-9
-keyopt,matid,3,0
