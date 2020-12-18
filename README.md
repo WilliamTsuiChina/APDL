@@ -1,6 +1,4 @@
-# zsmacro
-
-some macros for APDL in ANSYS
+# APDL
 
 此项目为工作中用到的apdl脚本
 
