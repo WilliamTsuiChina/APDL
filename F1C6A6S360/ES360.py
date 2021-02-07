@@ -1,15 +1,22 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-import os
 from time import strftime
 from time import localtime
 from time import sleep
+from os import chdir
+from os.path import dirname
+import sys
 
 
-os.chdir(os.path.dirname(__file__))
-my_data = pd.read_table('ElemRes.txt', sep='|', index_col=[0, 1])
+chdir(dirname(__file__))
+try:
+    my_data = pd.read_table('ElemRes.txt', sep='|', index_col=[0, 1])
+except:
+    print('ElemRes.txt不在同目录下')
+    sys.exit()
 
+print('开始')
 for k in range(0, 6):
     x = range(0, 360)
     y = []
@@ -18,6 +25,7 @@ for k in range(0, 6):
 
     elemnum = int(my_data.iloc[k, 0])
     plt.title(f'Axial Force of Element {elemnum}')
+    print(f'单元{elemnum}轴力图绘制完成')
     plt.plot(x, y)
     y_min = np.argmin(y)
     y_max = np.argmax(y)
@@ -34,6 +42,7 @@ for k in range(0, 6):
     plt.cla()
     plt.close("all")
 
+print('结束')
 
 
 

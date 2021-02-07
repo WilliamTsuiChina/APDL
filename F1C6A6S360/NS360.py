@@ -1,14 +1,20 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-import os
 from time import strftime
 from time import localtime
 from time import sleep
+from os import chdir
+from os.path import dirname
+import sys
 
 
-os.chdir(os.path.dirname(__file__))
-my_data = pd.read_table('NodeRes.txt', sep='|', index_col=[0, 1])
+chdir(dirname(__file__))
+try:
+    my_data = pd.read_table('NodeRes.txt', sep='|', index_col=[0, 1])
+except:
+    print('NodeRes.txt不在同目录下')
+    sys.exit()
 
 for k in range(0, 6):
     x = range(0, 360)
