@@ -16,6 +16,7 @@ except:
     print('NodeRes.txt不在同目录下')
     sys.exit()
 
+print('开始')
 for k in range(0, 6):
     x = range(0, 360)
     yfx = []
@@ -28,6 +29,7 @@ for k in range(0, 6):
 
     nodenum = int(my_data.iloc[k, 0])
     plt.title(f'Force Reaction of Node {nodenum}')
+    print(f'节点{nodenum}反力图绘制完成')
     plt.plot(x,yfx,label='Fx')
     plt.plot(x,yfy,label='Fy')
     plt.plot(x,yfz,label='Fz')
@@ -66,6 +68,6 @@ for k in range(0, 6):
     plt.close("all")
 
 
-
+print('结束')
 
 
