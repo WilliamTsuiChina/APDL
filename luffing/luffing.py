@@ -49,7 +49,7 @@ AW = atower.loc[0, '宽']  # 宽
 AH = atower.loc[0, '高']  # 高
 AT1 = atower.loc[0, '上下厚']   # 上下
 AT2 = atower.loc[0, '中厚']   # 中
-# 头部滑轮轴截面
+# 头部滑轮轴直径
 head_pin = somedata.loc[0, '参数']
 # 拉索截面
 inhaul_cable = 3.14 * (somedata.loc[1, '参数'] ** 2) / 4
@@ -124,6 +124,16 @@ for i in range(1, section_num + 1):
 s += f'SECTYPE,{section_num + 1},BEAM,I,,0' + '\n'
 s += 'SECOFFSET,CENT' + '\n'
 s += f"SECDATA,{AW},{AW},{AH},{AT1},{AT1},{AT2}" + '\n'
+
+# 定义头部板
+s += f'SECTYPE,{section_num + 2},SHELL' + '\n'
+s += f"SECDATA,{head_plate}" + '\n'
+
+# 定义滑轮轴
+s += f'SECTYPE,{section_num + 3},BEAM,CSOLID,,0' + '\n'
+s += 'SECOFFSET,CENT' + '\n'
+s += f"SECDATA,{head_pin/2}" + '\n'
+
 # 3、吊臂建模，先定义节点，然后选择对应的截面建立梁单元，同时将需要提取的节点编号、单元编号保存到列表中
 # 吊臂逐小节建节点NODE，并赋截面
 # 吊臂先零度位置建模，然后整体旋转angle = somedata.loc[8, '参数']
@@ -282,16 +292,154 @@ s += f'N,{ata_node+10},{-a_width_up/2},{a_high},{-dist_beam-a_dist}' + '\n'
 
 ############  定义单元
 s += '!define elements \n'
+# 吊臂每小节单元分开定义，并单独存储单元编号，主弦编号，区分上下弦
+###### 根部节
+# 单元
+s += 'TYPE,1' + '\n'
+# 材料
+s += 'MAT,1' + '\n'
+# 截面，上弦
+sec_num_temp = data_secnum.loc[1,'上弦']
+s += f'SECNUM,{sec_num_temp}' + '\n'
+
+s += 'EN,1,1,7' + '\n'
+for i in range(2,db1_segm+1):
+    s += f'EN,{i},{7+(i-2)*4},{11+(i-2)*4}' + '\n'
+
+s += f'EN,{db1_segm+1},2,8' + '\n'
+for i in range(2,db1_segm+1):
+    s += f'EN,{db1_segm+i},{8+(i-2)*4},{12+(i-2)*4}' + '\n'
+# 截面，下弦
+sec_num_temp = data_secnum.loc[1,'下弦']
+s += f'SECNUM,{sec_num_temp}' + '\n'
+# head_segm*2
+s += f'EN,{db1_segm*2+1},1,5' + '\n'
+for i in range(2,db1_segm+2):
+    s += f'EN,{db1_segm*2+i},{5+(i-2)*4},{9+(i-2)*4}' + '\n'
+
+# head_segm*3+1
+s += f'EN,{db1_segm*3+2},2,6' + '\n'
+for i in range(2,db1_segm+2):
+    s += f'EN,{db1_segm*3+1+i},{6+(i-2)*4},{10+(i-2)*4}' + '\n'
+
+# node number   head_segm*4+2
+
+# 截面，横腹杆，即上下面
+sec_num_temp = data_secnum.loc[1,'横腹杆']
+s += f'SECNUM,{sec_num_temp}' + '\n'
+
+s += f'EN,{db1_segm*4+3},1,3' + '\n'
+s += f'EN,{db1_segm*4+4},3,8' + '\n'
+s += f'EN,{db1_segm*4+5},2,3' + '\n'
+s += f'EN,{db1_segm*4+6},3,7' + '\n'
+
+node_num = db1_segm*4+6
+temp = 0
+# 上平面
+for i in range(1,db1_segm+1):
+    s += f'EN,{node_num+(i-1)*2+1},{7+(i-1)*4},{8+(i-1)*4}' + '\n'
+    temp = temp + 1
+    if i<db1_segm:
+        if (i%2)==0: # i是偶数
+            s += f'EN,{node_num+(i-1)*2+2},{8+(i-1)*4},{7+i*4}' + '\n'
+            temp = temp + 1
+        else:
+            s += f'EN,{node_num+(i-1)*2+2},{7+(i-1)*4},{8+i*4}' + '\n'
+            temp = temp + 1
+
+node_num = node_num + temp
+
+s += f'EN,{node_num+1},1,4' + '\n'
+s += f'EN,{node_num+2},4,6' + '\n'
+s += f'EN,{node_num+3},2,4' + '\n'
+s += f'EN,{node_num+4},4,5' + '\n'
+
+node_num = node_num + 4
+temp = 0
+# 下平面
+for i in range(1,db1_segm+2):
+    s += f'EN,{node_num+(i-1)*2+1},{5+(i-1)*4},{6+(i-1)*4}' + '\n'
+    temp = temp + 1
+    if i<(db1_segm+1):
+        if (i%2)==0: # i是偶数
+            s += f'EN,{node_num+(i-1)*2+2},{5+(i-1)*4},{6+i*4}' + '\n'
+            temp = temp + 1
+        else:
+            s += f'EN,{node_num+(i-1)*2+2},{6+(i-1)*4},{5+i*4}' + '\n'
+            temp = temp + 1
+
+node_num = node_num + temp
+# 截面，侧腹杆，即左右面
+sec_num_temp = data_secnum.loc[1,'侧腹杆']
+s += f'SECNUM,{sec_num_temp}' + '\n'
+temp = 0
+s += f'EN,{node_num+1},7,5' + '\n'
+temp = temp+1
+for i in range(1,db1_segm):
+    s += f'EN,{node_num+1+(i-1)*2+1},{7+(i-1)*4},{9+(i-1)*4}' + '\n'
+    s += f'EN,{node_num+1+(i-1)*2+2},{9+(i-1)*4},{11+(i-1)*4}' + '\n'
+    temp = temp+2
+
+node_num = node_num + temp
+s += f'EN,{node_num+1},{7+(db1_segm-1)*4},{9+(db1_segm-1)*4}' + '\n'
+
+node_num = node_num + 1
+
+temp = 0
+s += f'EN,{node_num+1},8,6' + '\n'
+temp = temp+1
+for i in range(1,db1_segm):
+    s += f'EN,{node_num+1+(i-1)*2+1},{8+(i-1)*4},{10+(i-1)*4}' + '\n'
+    s += f'EN,{node_num+1+(i-1)*2+2},{10+(i-1)*4},{12+(i-1)*4}' + '\n'
+    temp = temp+2
+
+node_num = node_num + temp
+s += f'EN,{node_num+1},{8+(db1_segm-1)*4},{10+(db1_segm-1)*4}' + '\n'
+
+node_num = node_num + 1
+
+# 截面，斜腹杆，该节吊臂前端一根斜的腹杆
+sec_num_temp = data_secnum.loc[1,'斜腹杆']
+s += f'SECNUM,{sec_num_temp}' + '\n'
+s += f'EN,{node_num+1},{8+(db1_segm-1)*4},{9+(db1_segm-1)*4}' + '\n'
+node_num = node_num + 1
+
+######## 根部第一节吊臂单元生成结束
+# 单元编号收集。 
+
+###### 中间节
+for i in range(2,dbnum):
+    # 中间节程序化生成单元2到dbnum-1节
+    print(f'第{i}节吊臂')
 
 
 
 
 
+###### 头部节
+
+
+###### 拉索
+
+
+###### A塔
+
+############  定义边界条件
 
 
 
+############  定义载荷
 
 
+############  求解
+
+
+############  后处理
+s +='''
+/PNUM,ELEM,1
+EPLOT
+/REPLOT
+'''
 f = open(mac_name, 'w')
 f.write(s)
 f.close()
