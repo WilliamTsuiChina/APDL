@@ -4,7 +4,9 @@
 # 2021-05-08开始编写
 import pandas as pd
 import os
-
+from math import sin
+from math import cos
+from math import pi
 
 os.chdir(os.path.dirname(__file__))
 io = r'luffingbeam.xlsx'
@@ -702,17 +704,25 @@ D,2,UZ,0
 D,2,ROTY,0
 D,2,ROTZ,0
 '''
-
-
-
-
-
+for i in range(1,5):
+    s += f'D,{ata_node+i},UX,0' + '\n'
+    s += f'D,{ata_node+i},UY,0' + '\n'
+    s += f'D,{ata_node+i},UZ,0' + '\n'
+    s += f'D,{ata_node+i},ROTY,0' + '\n'
+    s += f'D,{ata_node+i},ROTZ,0' + '\n'
 
 ############  定义载荷
+s += f'ACEL,,{gravity},' + '\n'
+f_h = headforce * 10000
+f_y = -(maxload+toolload)*10000*(1+sin(angle*pi/180))/2
+f_z = -(maxload+toolload)*10000*cos(angle*pi/180)/2
+f_y2 = -(maxload+toolload)*10000/2
+s += f'F,{top_node+2},FX,{f_h}' + '\n'
+s += f'F,{top_node+2},FY,{f_y}' + '\n'
+s += f'F,{top_node+2},FZ,{f_z}' + '\n'
 
-
+s += f'F,{top_node+3},FY,{f_y2}' + '\n'
 ############  求解
-
 
 ############  后处理
 #s +='''
