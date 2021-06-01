@@ -57,7 +57,7 @@ AT2 = atower.loc[0, '中厚']   # 中
 # 头部滑轮轴直径
 head_pin = somedata.loc[0, '参数']
 # 拉索截面
-inhaul_cable = 3.14 * (somedata.loc[1, '参数'] ** 2) / 4
+inhaul_cable = pi * (somedata.loc[1, '参数'] ** 2) / 4
 # 头部板厚
 head_plate = somedata.loc[2, '参数']
 # 滑轮左侧偏移
@@ -759,11 +759,16 @@ NLGEOM,ON
 SOLVE
 '''
 ############  后处理
-
+# elem[]——区域单元开始单元编号，共有(dbnum*9+1)个数据
+# 编号从0到(dbnum*9)
+# 第一节到第(dbnum-1)节
+# 0滑轮侧上弦，1非滑轮侧上弦，2滑轮侧下弦，3非滑轮侧下弦，4上平面腹杆，5下平面腹杆，6滑轮侧侧面腹杆，7非滑轮侧侧面腹杆，8前端斜腹杆
+# 头部节(即第dbnum节)
+# 0滑轮侧上弦，1非滑轮侧上弦，2滑轮侧下弦，3非滑轮侧下弦，4上平面腹杆，5下平面腹杆，6滑轮侧侧面腹杆，7非滑轮侧侧面腹杆，8前区域结束单元编号+1，9与8相同
 
 # 全部吊臂-侧向位移截图
 elem_min = elem[0]
-elem_max = elem[dbnum*9-1]-1
+elem_max = elem[dbnum*9]-1
 s += f'ESEL,S,ELEM,,{elem_min},{elem_max},1,0' + '\n'
 s +='''
 /POST1
@@ -825,7 +830,13 @@ for i in range(1,dbnum+1):
 
 
 
-
+# TODO: *GET,最大值变量,PLNSOL,0,MAX,,,
+#       *GET,最小值变量,PLNSOL,0,MIN,,,
+# 使用命令流提取云图中的最大值和最小值
+# *GET,变量,ELEM,单元编号,SMISC,1
+# 提取单元轴力
+# *GET,变量,ELEM,单元编号,SMISC,31
+# 提取单元应力
 
 
 f = open(mac_name, 'w')
