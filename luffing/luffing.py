@@ -2,6 +2,7 @@
 # 动臂吊臂建模宏命令生成
 # 注意：必须先按luffingbeam.xlsx格式填充吊臂设计的各项参数
 # 2021-05-08开始编写
+# 2021-05-31初版完成
 import pandas as pd
 import os
 from math import sin
@@ -320,6 +321,8 @@ s += f'N,{ata_node+9},{a_width_up/2},{a_high},{-dist_beam-a_dist}' + '\n'
 s += f'N,{ata_node+10},{-a_width_up/2},{a_high},{-dist_beam-a_dist}' + '\n'
 
 ############  定义单元
+# 定义一个列表记录每个区域中单元编号的起点
+elem = []
 s += '!define elements \n'
 # 吊臂每小节单元分开定义，并单独存储单元编号，主弦编号，区分上下弦
 ###### 根部节
@@ -332,10 +335,12 @@ sec_num_temp = data_secnum.loc[1,'上弦']
 s += f'SECNUM,{sec_num_temp}' + '\n'
 
 s += 'EN,1,1,7' + '\n'
+elem.append(1)
 for i in range(2,db1_segm+1):
     s += f'EN,{i},{7+(i-2)*4},{11+(i-2)*4}' + '\n'
 
 s += f'EN,{db1_segm+1},2,8' + '\n'
+elem.append(db1_segm+1)
 for i in range(2,db1_segm+1):
     s += f'EN,{db1_segm+i},{8+(i-2)*4},{12+(i-2)*4}' + '\n'
 # 截面，下弦
@@ -343,11 +348,13 @@ sec_num_temp = data_secnum.loc[1,'下弦']
 s += f'SECNUM,{sec_num_temp}' + '\n'
 # head_segm*2
 s += f'EN,{db1_segm*2+1},1,5' + '\n'
+elem.append(db1_segm*2+1)
 for i in range(2,db1_segm+2):
     s += f'EN,{db1_segm*2+i},{5+(i-2)*4},{9+(i-2)*4}' + '\n'
 
 # head_segm*3+1
 s += f'EN,{db1_segm*3+2},2,6' + '\n'
+elem.append(db1_segm*3+2)
 for i in range(2,db1_segm+2):
     s += f'EN,{db1_segm*3+1+i},{6+(i-2)*4},{10+(i-2)*4}' + '\n'
 
@@ -356,7 +363,7 @@ for i in range(2,db1_segm+2):
 # 截面，横腹杆，即上下面
 sec_num_temp = data_secnum.loc[1,'横腹杆']
 s += f'SECNUM,{sec_num_temp}' + '\n'
-
+elem.append(db1_segm*4+3)
 s += f'EN,{db1_segm*4+3},1,3' + '\n'
 s += f'EN,{db1_segm*4+4},3,8' + '\n'
 s += f'EN,{db1_segm*4+5},2,3' + '\n'
@@ -377,7 +384,7 @@ for i in range(1,db1_segm+1):
             temp = temp + 1
 
 elem_num = elem_num + temp
-
+elem.append(elem_num+1)
 s += f'EN,{elem_num+1},1,4' + '\n'
 s += f'EN,{elem_num+2},4,6' + '\n'
 s += f'EN,{elem_num+3},2,4' + '\n'
@@ -402,6 +409,7 @@ elem_num = elem_num + temp
 sec_num_temp = data_secnum.loc[1,'侧腹杆']
 s += f'SECNUM,{sec_num_temp}' + '\n'
 temp = 0
+elem.append(elem_num+1)
 s += f'EN,{elem_num+1},7,5' + '\n'
 temp = temp+1
 for i in range(1,db1_segm):
@@ -415,6 +423,7 @@ s += f'EN,{elem_num+1},{7+(db1_segm-1)*4},{9+(db1_segm-1)*4}' + '\n'
 elem_num = elem_num + 1
 
 temp = 0
+elem.append(elem_num+1)
 s += f'EN,{elem_num+1},8,6' + '\n'
 temp = temp+1
 for i in range(1,db1_segm):
@@ -430,6 +439,7 @@ elem_num = elem_num + 1
 # 截面，斜腹杆，该节吊臂前端一根斜的腹杆
 sec_num_temp = data_secnum.loc[1,'斜腹杆']
 s += f'SECNUM,{sec_num_temp}' + '\n'
+elem.append(elem_num+1)
 s += f'EN,{elem_num+1},{8+(db1_segm-1)*4},{9+(db1_segm-1)*4}' + '\n'
 elem_num = elem_num + 1
 
@@ -455,12 +465,14 @@ for i in range(2,dbnum):
     sec_num_temp = data_secnum.loc[i,'上弦']
     s += f'SECNUM,{sec_num_temp}' + '\n'
     temp = 0
+    elem.append(elem_num+1)
     for k in range(1,2*dbi_segm+1):
         s += f'EN,{elem_num+k},{db_node1_num+(k-1)*4},{db_node1_num+k*4}' + '\n'
         temp = temp +1
     
     elem_num = elem_num + temp
     temp = 0
+    elem.append(elem_num+1)
     for k in range(1,2*dbi_segm+1):
         s += f'EN,{elem_num+k},{db_node2_num+(k-1)*4},{db_node2_num+k*4}' + '\n'
         temp = temp +1
@@ -470,12 +482,14 @@ for i in range(2,dbnum):
     sec_num_temp = data_secnum.loc[i,'下弦']
     s += f'SECNUM,{sec_num_temp}' + '\n'
     temp = 0
+    elem.append(elem_num+1)
     for k in range(1,2*dbi_segm+1):
         s += f'EN,{elem_num+k},{db_node3_num+(k-1)*4},{db_node3_num+k*4}' + '\n'
         temp = temp +1
     
     elem_num = elem_num + temp
     temp = 0
+    elem.append(elem_num+1)
     for k in range(1,2*dbi_segm+1):
         s += f'EN,{elem_num+k},{db_node4_num+(k-1)*4},{db_node4_num+k*4}' + '\n'
         temp = temp +1
@@ -486,6 +500,7 @@ for i in range(2,dbnum):
     sec_num_temp = data_secnum.loc[i,'横腹杆']
     s += f'SECNUM,{sec_num_temp}' + '\n'
     temp = 0
+    elem.append(elem_num+1)
     for k in range(1,dbi_segm+1):
         s += f'EN,{elem_num+k*2-1},{db_node2_num+(k-1)*8},{db_node1_num+4+(k-1)*8}' + '\n'
         s += f'EN,{elem_num+k*2},{db_node1_num+4+(k-1)*8},{db_node2_num+8+(k-1)*8}' + '\n'
@@ -495,6 +510,7 @@ for i in range(2,dbnum):
     s += f'EN,{elem_num+1},{db_node1_num+dbi_segm*8},{db_node2_num+dbi_segm*8}' + '\n'
     elem_num = elem_num + 1
     temp = 0
+    elem.append(elem_num+1)
     for k in range(1,dbi_segm+1):
         s += f'EN,{elem_num+k*2-1},{db_node3_num+(k-1)*8},{db_node4_num+4+(k-1)*8}' + '\n'
         s += f'EN,{elem_num+k*2},{db_node4_num+4+(k-1)*8},{db_node3_num+8+(k-1)*8}' + '\n'
@@ -508,6 +524,7 @@ for i in range(2,dbnum):
     sec_num_temp = data_secnum.loc[i,'侧腹杆']
     s += f'SECNUM,{sec_num_temp}' + '\n'
     temp = 0
+    elem.append(elem_num+1)
     for k in range(1,dbi_segm+1):
         s += f'EN,{elem_num+k*2-1},{db_node2_num+(k-1)*8},{db_node4_num+4+(k-1)*8}' + '\n'
         s += f'EN,{elem_num+k*2},{db_node4_num+4+(k-1)*8},{db_node2_num+8+(k-1)*8}' + '\n'
@@ -517,6 +534,7 @@ for i in range(2,dbnum):
     s += f'EN,{elem_num+1},{db_node2_num+dbi_segm*8},{db_node4_num+dbi_segm*8}' + '\n'
     elem_num = elem_num + 1
     temp = 0
+    elem.append(elem_num+1)
     for k in range(1,dbi_segm+1):
         s += f'EN,{elem_num+k*2-1},{db_node3_num+(k-1)*8},{db_node1_num+4+(k-1)*8}' + '\n'
         s += f'EN,{elem_num+k*2},{db_node1_num+4+(k-1)*8},{db_node3_num+8+(k-1)*8}' + '\n'
@@ -529,6 +547,7 @@ for i in range(2,dbnum):
     # 端头斜腹杆
     sec_num_temp = data_secnum.loc[i,'斜腹杆']
     s += f'SECNUM,{sec_num_temp}' + '\n'
+    elem.append(elem_num+1)
     s += f'EN,{elem_num+1},{db_node2_num+dbi_segm*8},{db_node3_num+dbi_segm*8}' + '\n'
     elem_num = elem_num + 1
 
@@ -544,12 +563,14 @@ sec_num_temp = data_secnum.loc[dbnum,'上弦']
 s += f'SECNUM,{sec_num_temp}' + '\n'
 
 temp = 0
+elem.append(elem_num+1)
 for k in range(1,2*head_segm+1):
     s += f'EN,{elem_num+k},{db_node1_num+(k-1)*4},{db_node1_num+k*4}' + '\n'
     temp = temp +1
     
 elem_num = elem_num + temp
 temp = 0
+elem.append(elem_num+1)
 for k in range(1,2*head_segm+1):
     s += f'EN,{elem_num+k},{db_node2_num+(k-1)*4},{db_node2_num+k*4}' + '\n'
     temp = temp +1
@@ -561,12 +582,14 @@ sec_num_temp = data_secnum.loc[dbnum,'下弦']
 s += f'SECNUM,{sec_num_temp}' + '\n'
 
 temp = 0
+elem.append(elem_num+1)
 for k in range(1,2*head_segm+1):
     s += f'EN,{elem_num+k},{db_node3_num+(k-1)*4},{db_node3_num+k*4}' + '\n'
     temp = temp +1
     
 elem_num = elem_num + temp
 temp = 0
+elem.append(elem_num+1)
 for k in range(1,2*head_segm+1):
     s += f'EN,{elem_num+k},{db_node4_num+(k-1)*4},{db_node4_num+k*4}' + '\n'
     temp = temp +1
@@ -578,6 +601,7 @@ sec_num_temp = data_secnum.loc[dbnum,'横腹杆']
 s += f'SECNUM,{sec_num_temp}' + '\n'
 
 temp = 0
+elem.append(elem_num+1)
 for k in range(1,head_segm):
     s += f'EN,{elem_num+k*2-1},{db_node2_num+(k-1)*8},{db_node1_num+4+(k-1)*8}' + '\n'
     s += f'EN,{elem_num+k*2},{db_node1_num+4+(k-1)*8},{db_node2_num+8+(k-1)*8}' + '\n'
@@ -588,6 +612,7 @@ s += f'EN,{elem_num+1},{db_node2_num+(head_segm-1)*8},{db_node1_num+4+(head_segm
 s += f'EN,{elem_num+2},{db_node1_num+4+(head_segm-1)*8},{db_node2_num+4+(head_segm-1)*8}' + '\n'
 elem_num = elem_num + 2
 temp = 0
+elem.append(elem_num+1)
 for k in range(1,head_segm):
     s += f'EN,{elem_num+k*2-1},{db_node3_num+(k-1)*8},{db_node4_num+4+(k-1)*8}' + '\n'
     s += f'EN,{elem_num+k*2},{db_node4_num+4+(k-1)*8},{db_node3_num+8+(k-1)*8}' + '\n'
@@ -603,6 +628,7 @@ sec_num_temp = data_secnum.loc[dbnum,'侧腹杆']
 s += f'SECNUM,{sec_num_temp}' + '\n'
 
 temp = 0
+elem.append(elem_num+1)
 for k in range(1,head_segm-1):
     s += f'EN,{elem_num+k*2-1},{db_node2_num+(k-1)*8},{db_node4_num+4+(k-1)*8}' + '\n'
     s += f'EN,{elem_num+k*2},{db_node4_num+4+(k-1)*8},{db_node2_num+8+(k-1)*8}' + '\n'
@@ -613,6 +639,7 @@ s += f'EN,{elem_num+1},{db_node2_num+(head_segm-2)*8},{db_node4_num+4+(head_segm
 s += f'EN,{elem_num+2},{db_node2_num+4+(head_segm-2)*8},{db_node4_num+4+(head_segm-2)*8}' + '\n'
 elem_num = elem_num + 2
 temp = 0
+elem.append(elem_num+1)
 for k in range(1,head_segm-1):
     s += f'EN,{elem_num+k*2-1},{db_node3_num+(k-1)*8},{db_node1_num+4+(k-1)*8}' + '\n'
     s += f'EN,{elem_num+k*2},{db_node1_num+4+(k-1)*8},{db_node3_num+8+(k-1)*8}' + '\n'
@@ -622,7 +649,9 @@ elem_num = elem_num + temp
 s += f'EN,{elem_num+1},{db_node3_num+(head_segm-2)*8},{db_node1_num+4+(head_segm-2)*8}' + '\n'
 s += f'EN,{elem_num+2},{db_node1_num+4+(head_segm-2)*8},{db_node3_num+4+(head_segm-2)*8}' + '\n'
 elem_num = elem_num + 2
-
+########## elem[]结束
+elem.append(elem_num+1)
+elem.append(elem_num+1)
 # 头部滑轮轴
 s += f'SECNUM,{section_num + 3}' + '\n'
 s += f'EN,{elem_num+1},{top_node+1},{top_node+2}' + '\n'
@@ -723,13 +752,82 @@ s += f'F,{top_node+2},FZ,{f_z}' + '\n'
 
 s += f'F,{top_node+3},FY,{f_y2}' + '\n'
 ############  求解
-
+s += '''
+/SOLU
+ALLSEL,ALL
+NLGEOM,ON
+SOLVE
+'''
 ############  后处理
-#s +='''
-#/PNUM,ELEM,1
-#EPLOT
-#/REPLOT
-#'''
+
+
+# 全部吊臂-侧向位移截图
+elem_min = elem[0]
+elem_max = elem[dbnum*9-1]-1
+s += f'ESEL,S,ELEM,,{elem_min},{elem_max},1,0' + '\n'
+s +='''
+/POST1
+/DSCALE,ALL,1.0
+EPLOT
+/ESHAPE,1
+/VIEW,1,-0.75,0.4,-0.52   
+/ANG,1
+/AUTO,1
+/REP,FAST
+PLNSOL,U,X,0,1
+/SHOW,PNG,,0
+PNGR,COMP,1,-1  
+PNGR,ORIENT,HORIZ   
+PNGR,COLOR,2
+PNGR,TMOD,1 
+/GFILE,800, 
+/CMAP,_TEMPCMAP_,CMP,,SAVE  
+/RGB,INDEX,100,100,100,0
+/RGB,INDEX,0,0,0,15 
+/REPLOT 
+/CMAP,_TEMPCMAP_,CMP
+/DELETE,_TEMPCMAP_,CMP  
+/SHOW,CLOSE 
+/DEVICE,VECTOR,0
+'''
+stemp ='''
+/POST1
+/DSCALE,ALL,1.0
+EPLOT
+/ESHAPE,1
+/VIEW,1,-0.75,0.4,-0.52   
+/ANG,1
+/AUTO,1
+/REP,FAST
+PLNSOL,S,EQV
+/SHOW,PNG,,0
+PNGR,COMP,1,-1  
+PNGR,ORIENT,HORIZ   
+PNGR,COLOR,2
+PNGR,TMOD,1 
+/GFILE,800, 
+/CMAP,_TEMPCMAP_,CMP,,SAVE  
+/RGB,INDEX,100,100,100,0
+/RGB,INDEX,0,0,0,15 
+/REPLOT 
+/CMAP,_TEMPCMAP_,CMP
+/DELETE,_TEMPCMAP_,CMP  
+/SHOW,CLOSE 
+/DEVICE,VECTOR,0
+'''
+
+# 吊臂每一节分别整体应力截图
+for i in range(1,dbnum+1):
+    elem_min = elem[(i-1)*9]
+    elem_max = elem[i*9]-1
+    s += f'ESEL,S,ELEM,,{elem_min},{elem_max},1,0' + '\n'
+    s += stemp
+
+
+
+
+
+
 f = open(mac_name, 'w')
 f.write(s)
 f.close()
